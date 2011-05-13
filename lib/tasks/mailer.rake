@@ -1,7 +1,7 @@
 namespace :mailer do
      desc 'Send massmailer to Subscribed users'
 
-     #Task to be used for sending mailers to sub-scribed users only from the d/b
+     #Task to be used for sending mailers to sub-scribed users only
      task :send => :environment do
            count = 0
             Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
@@ -22,7 +22,7 @@ namespace :mailer do
            #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com","vishwadeep@joshsoftware.com"].each do |mail|
            ["ninad@joshsoftware.com"].each do |mail|
                   user=Subscriber.find_by_email(mail)
-                  Notifier.deliver_massmailer_mail(mail,user.unique_identifier)
+                  Notifier.deliver_test_mail(mail,user.unique_identifier)
                   count +=1
           end
           puts "Mail sent to #{count} users"
