@@ -1,9 +1,8 @@
 class Notifier < ActionMailer::Base
 
-   # massmailer notification
-   # Here the incoming parameter "mail" will be string
-
-   def massmailer_mail(mail,code_to_unsubscribe)
+   # Below method will be used for test mailers only
+   # Here the incoming parameter "mail" will be string(email) & corresponding uid for that email
+   def test_mail(mail,code_to_unsubscribe)
         setup_email( mail )
         #current date value on which mailer will be sent
         @dt=Date.today.strftime("%B %G")
