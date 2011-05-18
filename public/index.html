@@ -1,239 +1,111 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
+<head>
+<title>JOSH SOFTWARE PVT. LTD.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="audience" content="all">
+<meta name="distribution" content="global">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="FOLLOW, INDEX">
+<meta name="revisit-after" content="2 days">
+<meta name="copyright" content="Site Name">
+<meta name="author" content="Site admin Email">
+<meta name="abstract" content="Site description text">
 
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
+</head>
 
+<!--<body style="background-color:#A4FF9F;">-->
+<body>
 
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
+<!-- back starts -->   
+<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:530px;margin-left:250px;padding-bottom:45px;">
+<br/>
 
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
+<!-- Container Starts -->
 
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
+<br/>
+<div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
 
-      #footer {
-        clear: both;
-      }
+   <div style="width: 680px; float: left;">
 
+    <!-- header Starts -->          
+    <div class="header" style="background-color:white;height:130px;font-size: 11px;">
 
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+        <!-- logo Starts -->          
 
+	<div class="logo" style="width: 400px; float: left; padding: 20px;"> 
+          <a href="http://www.joshsoftware.com/"><img src="http://www.joshsoftware.com/system/logos/1/layout_1/logo.jpg?1258615261" 
+alt="" width="164px" height="83px" border="0"></a>
+          
+           <strong><i><font size="3">Where Programming is an Art!</font></i></strong> 
+	</div>
+        
+        <!-- logo ends-->         
 
-      #header {
-        background-image: url("images/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
+        <!-- ruby Starts -->         
+	
+        <div class="ruby" style="width: 100px; padding: 20px; float: right; text-align:right;"> 
+           <img src="http://www.joshsoftware.com/system/images/39/medium_thumb/ruby_on_rails_logo_3.jpg" border="0">
+	</div>
 
+        <!-- ruby ends -->   
 
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -55px;
-        margin-right: -10px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
-
-      #about-content ul {
-        padding: 0;
-        list-style-type: none;
-      }
-
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
-
-
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
-
-
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-
-    </style>
-    <script type="text/javascript">
-      function about() {
-        info = document.getElementById('about-content');
-        if (window.XMLHttpRequest)
-          { xhr = new XMLHttpRequest(); }
-        else
-          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
-        xhr.open("GET","rails/info/properties",false);
-        xhr.send("");
-        info.innerHTML = xhr.responseText;
-        info.style.display = 'block'
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
-              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove or rename this file</h2>
-              <p>Routes are set up in config/routes.rb.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:migrate</code> to create your database. If you're not using SQLite (the default), edit <code>config/database.yml</code> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
     </div>
-  </body>
+    <!-- header ends -->          
+
+  </div>
+
+
+<!-- index starts -->          
+<div class="index" style="background-color:#EFEFEF;padding-left:40px;">
+<strong>Newsletters:</strong>
+<br/>
+<br/>
+</div>
+<!-- index ends -->          
+
+<!-- Content Starts -->  
+<div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
+
+<br/><br/>
+<b><a href="http://mailit.joshsoftware.com/April2011_Newsletter" target="_blank" style="color:black;">April_2011</a></b>
+
+<hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
+
+<b><a href="http://mailit.joshsoftware.com/May2011_Newsletter" target="_blank" style="color:black;">May_2011</a></b>
+
+<hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
+
+<br/>
+
+</div>
+<!-- Latestmasterpieces end -->  
+</div>
+<!-- Content ends -->  
+
+<br/>
+<br/>
+<!-- Footer starts -->  
+   <div class="footer" style="background-color:#5685D6; height:70px;margin-top:150px;">
+
+     <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:270px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
+  
+     <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
+   
+     <a href="http://www.meetup.com/PuneRailsMeetup/" ><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
+  
+   </div>
+<!-- Footer end -->
+    
+<!-- Container Ends -->
+</div>
+
+<div>
+<!-- back ends -->   
+
+</body>
+
 </html>
