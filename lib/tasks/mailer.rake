@@ -22,7 +22,9 @@ namespace :mailer do
            #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com","vishwadeep@joshsoftware.com"].each do |mail|
            ["ninad@joshsoftware.com"].each do |mail|
                   user=Subscriber.find_by_email(mail)
-                  Notifier.deliver_test_mail(mail,user.unique_identifier)
+                  #Notifier.deliver_test_mail(mail,user.unique_identifier)
+                  #Below method will avoid the creation of template test_mail.html.erb under /app/views/notifier   
+                  Notifier.deliver_massmailer(user)
                   count +=1
           end
           puts "Mail sent to #{count} users"
