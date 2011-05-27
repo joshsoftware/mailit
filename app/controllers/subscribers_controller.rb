@@ -9,4 +9,8 @@ class SubscribersController < ApplicationController
     render
   end
 
+  def send_mailers
+       render
+  end
+
 end
