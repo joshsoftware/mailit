@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>JOSH SOFTWARE PVT. LTD.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="audience" content="all">
+<meta name="distribution" content="global">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="FOLLOW, INDEX">
+<meta name="revisit-after" content="2 days">
+<meta name="copyright" content="Site Name">
+<meta name="author" content="Site admin Email">
+<meta name="abstract" content="Site description text">
+
+<%= javascript_include_tag "jquery" %>
+</head>
+
+<body>
+
+<!-- back starts -->   
+<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:980px;height:520px;margin-left:180px;">
+<br/>
+
+<!-- Container Starts -->
+
+<br/>
+<!--<div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 800px; background-color:#FFFFFF;">-->
+
+   <div style="width: 900px; float: left;padding:0 30pt;">
+
+    <!-- header Starts -->          
+    <div class="header" style="background-color:white;height:130px;font-size: 11px;">
+
+        <!-- logo Starts -->          
+
+	<div class="logo" style="width: 400px; float: left; padding: 20px;"> 
+          <a href="http://www.joshsoftware.com/"><img src="http://www.joshsoftware.com/system/logos/1/layout_1/logo.jpg?1258615261" 
+alt="" width="164px" height="83px" border="0"></a>
+          
+           <strong><i><font size="3">Where Programming is an Art!</font></i></strong> 
+	</div>
+        
+        <!-- logo ends-->         
+
+        <!-- ruby Starts -->         
+	
+        <div class="ruby" style="width: 100px; padding: 20px; float: right; text-align:right;"> 
+           <img src="http://www.joshsoftware.com/system/images/39/medium_thumb/ruby_on_rails_logo_3.jpg" border="0">
+	</div>
+
+        <!-- ruby ends -->   
+
+    </div>
+    <!-- header ends -->          
+
+  </div>
+
+<!-- Content Starts -->  
+<div class="content" style="width: 700px; padding-left:40px; padding-top:150px;text-align:justify;">  
+
+<div style="background-color:white;width:750px;">
+
+<%= form_tag  :controller => 'subscribers', :action => 'send_mailers' ,  :multipart => true  %>
+
+<table style="padding:0 40pt;">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr>
+      <td>Mailer Subject *</td>
+     <td><%= text_field_tag "subject" %></td>
+     </tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr>
+     <td>Upload Mailer Template *</td>
+     <td> <%= file_field_tag  "upload_template"%></td>
+     </tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr>
+     <td>Type of Mailer *</td>
+     <td> <%= select_tag  "send_mail", options_for_select([["Test Mailer","test"],["Existing Database","database",],["External Database","externaldb"]]) %></td>
+     </tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+
+     <tr id="test_mail">
+        <td>Enter email address (comma separated) *</td>
+        <td> <%= text_area_tag "test_address", {}, :cols => "50", :rows => "5" %></td>
+     </tr>
+     
+     <tr id="ex_db">
+        <td><b>Note:</b> Please note that the newsletter will be sent to </td>
+        <td>the subscribed-users only from the existing database</td>
+     </tr>
+ 
+
+      <tr id="csv_upload">
+        <td>Upload CSV *</td>
+        <td> <%= file_field_tag  "csv_upload"%></td>
+     </tr>
+
+     <tr></tr>
+     <tr></tr>
+     <tr></tr>
+
+  </tbody>
+</table>
+<p>
+<%= submit_tag 'Send Mailer',:style =>'background-color:#B5E1F4;margin-left:55px;;'%>
+</p>
+<br/>
+</form>
+
+<script type="text/javascript">
+            // <![CDATA[
+                 $(document).ready(function () {
+		 $('#send_mail').change(function(){
+                      if($('#send_mail').val() == "test"){
+		      $('#test_mail').show();
+                      $('#ex_db').hide();
+		      $('#csv_upload').hide();
+		      }
+		      else if($('#send_mail').val() == "externaldb"){
+		      $('#test_mail').hide();
+                      $('#ex_db').hide();
+		      $('#csv_upload').show();
+		      }
+		      else{
+		      $('#test_mail').hide();
+		      $('#csv_upload').hide();
+                      $('#ex_db').show();    
+		      }
+	              });
+		  });
+                      $('#test_mail').show();
+                      $('#ex_db').hide();
+                      $('#csv_upload').hide();
+             // ]]>
+</script>
+
+</div>
+<!-- Latestmasterpieces end -->  
+</div>
+</div>
+<!-- Content ends -->  
+<!-- Footer starts -->  
+   <div class="footer" style="background-color:#5685D6; height:70px;width:980px;margin-left:180px">
+
+     <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:370px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
+  
+     <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
+   
+     <a href="http://www.meetup.com/PuneRailsMeetup/" ><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
+  
+   </div>
+<!-- Footer end -->
+    
+<!-- Container Ends -->
+<!--</div>-->
+
+<div>
+<!-- back ends -->   
+
+</body>
+
+</html>
