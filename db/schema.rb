@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110509140135) do
+ActiveRecord::Schema.define(:version => 20110602071315) do
+
+  create_table "newsletters", :force => true do |t|
+    t.string   "mailer_subject"
+    t.string   "mailer_template"
+    t.string   "type_of_mailer"
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "subscribers", :force => true do |t|
     t.string   "first_name"
