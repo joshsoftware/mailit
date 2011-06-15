@@ -8,6 +8,11 @@ gem 'rails', '3.0.7'
 gem 'mysql2', '0.2.7'
 
 gem "jquery-rails"
+
+group :test do
+  gem "rspec-rails", "~> 2.4"
+  gem "factory_girl_rails"
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 
