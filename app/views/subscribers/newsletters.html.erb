@@ -64,11 +64,15 @@ alt="" width="164px" height="83px" border="0"></a>
 
 <div style="background-color:white;width:750px;">
 
-<%= form_tag  send_mailers_path,:multipart => true  %>
+<%= form_tag send_mailers_path,:multipart => true %>
 
 <div style="background-color:#F2C9C9;text-align:center;">
-<%= flash[:notice] %>
-<% flash[:notice] = nil %>
+<%= flash[:notice] if flash[:notice].present?%>
+<%= flash[:error] if flash[:error].present?%>
+
+<%= flash[:notice] = nil%>
+<%= flash[:error] =nil %>
+
 </div>
 <table style="padding:0 40pt;">
   <thead>
@@ -84,7 +88,7 @@ alt="" width="164px" height="83px" border="0"></a>
      <tr></tr>
      <tr>
       <td>Mailer Subject *</td>
-     <td><%= text_field_tag "subject" %></td>
+     <td><%= text_field_tag "subject", params[:subject] %></td>
      </tr>
      <tr></tr>
      <tr></tr>
