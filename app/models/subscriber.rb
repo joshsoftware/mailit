@@ -2,6 +2,7 @@ require 'csv'
 require 'digest/md5'
 
 class Subscriber < ActiveRecord::Base
+    validates_presence_of :first_name,:last_name,:email
     validates :email, :uniqueness => true
 	
     scope :active, where(:is_subscribed => true)
@@ -15,8 +16,8 @@ class Subscriber < ActiveRecord::Base
     #Method to import users from csv into db
     def self.import
         #This will be the final csv file including new merged users to be imported into d/b
-        CSV.open("finallist_11thmay.csv", "r").each do |row|
-          #CSV.open("local_emails.csv", "r").each do |row|
+        #CSV.open("finallist_11thmay.csv", "r").each do |row|
+          CSV.open("local_emails.csv", "r").each do |row|
           begin
              next if row.blank?
              Subscriber.create!(:first_name => row[0],
