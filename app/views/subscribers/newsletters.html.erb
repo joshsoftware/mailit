@@ -119,7 +119,7 @@ alt="" width="164px" height="83px" border="0"></a>
 
      <tr id="test_mail">
         <td>Enter email address (comma separated) *</td>
-        <td> <%= text_area_tag "test_email_address", {}, :cols => "50", :rows => "5" %></td>
+        <td> <%= text_area_tag "test_email_address", params[:test_email_address], :cols => "50", :rows => "5" %></td>
      </tr>
      
      <tr id="ex_db">
