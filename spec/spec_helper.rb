@@ -25,3 +25,10 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
+
+#This method has been written to by-pass the basic authentication check added for /newsletters
+#and /send_mailers actions while executing specs.
+ def by_pass_basic_authentication
+     controller.stub!(:authentication_check).and_return(true)
+ end
+
