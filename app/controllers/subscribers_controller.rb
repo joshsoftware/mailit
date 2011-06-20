@@ -1,7 +1,7 @@
 require 'csv'
 
 class SubscribersController < ApplicationController
-  
+
   USER, PASSWORD = 'newsletter', 'josh123'
   before_filter :authentication_check, :only => [:newsletters,:send_mailers]
 
@@ -22,12 +22,8 @@ class SubscribersController < ApplicationController
   def send_mailers
     @news=Newsletter.new(:mailer_subject => params[:subject],:mailer_template => params[:upload_template], :type_of_mailer => params[:send_mail])
       if @news.valid?
-         #@news.save
-         #flash[:notice] = "Mailer sent sucessfully."
-          p "valid..."
           #Test_mailer
           if params[:send_mail] == "test" and !params[:test_email_address].blank?
-            p "inside test..."
              #Separate the comma separated email id's
              params[:test_email_address].split(",").each do |email|
              unique_identifier = Digest::MD5.hexdigest(email)
@@ -44,16 +40,16 @@ class SubscribersController < ApplicationController
              Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
                begin
                Notifier.deliver_massmailer(params[:subject], params[:upload_template], subscriber.email,subscriber.unique_identifier)
+               flash[:notice] = "Email sent successfully"
                count += 1
                rescue
                 puts "#{subscriber.login} - Error in sending to #{subscriber.email}"
                end
              end
-             puts "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["iis_subscribed = true"]).size}"
-             puts "Mail sent to #{count} users"
+             #puts "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
+             #puts "Mail sent to #{count} users"
           #Mailer to external db 
           elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
-             p "inside csv..."
              begin
                @uploaded_csv=CSV::Reader.parse(params[:csv_upload])
                @uploaded_csv.each do |row|
@@ -71,55 +67,13 @@ class SubscribersController < ApplicationController
              end  
 
           else
-            p "inside else1..."
             flash[:error] = "Please enter all mandatory fields(*)"
-            #redirect_to :controller => 'subscribers', :action => 'send_mailers'
           end
       else
-         p "inside else2..."
          flash[:error] = @news.errors.full_messages.join(', ')
       end
 
     render :action => :newsletters
-
-=begin
-    #check if the fields "subject" & "upload_template" are not blank
-    if !params[:subject].blank? and !params[:upload_template].blank?
-      #Test_mailer
-      if params[:send_mail] == "test" and !params[:test_address].blank?
-         #Separate the comma separated email id's
-         params[:test_email_address].split(",").each do |email|
-           unique_identifier = Digest::MD5.hexdigest(email)
-           Notifier.deliver_massmailer(params[:subject], params[:upload_template], email,unique_identifier)
-         end
-      #Mailer to subscribed users in the database
-      elsif params[:send_mail] == "database"
-        count = 0
-        Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
-          begin
-             Notifier.deliver_massmailer(params[:subject], params[:upload_template], subscriber.email,subscriber.unique_identifier)
-             count += 1
-          rescue
-             puts "#{subscriber.login} - Error in sending to #{subscriber.email}"
-          end
-        end
-        puts "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
-        puts "Mail sent to #{count} users"
-      #Mailer to external db 
-      elsif params[:send_mail] == "csv" and !params[:csv_upload].blank?
-
-      
-      else
-          flash[:notice] = "Please enter all mandatory fields(*)"
-          redirect_to :controller => 'subscribers', :action => 'send_mailers'
-      end
-      flash[:notice] = "Mailer sent sucessfully."
-      redirect_to :controller => 'subscribers', :action => 'send_mailers'
-    else
-      flash[:notice] = "Please enter all mandatory fields(*)"
-      render :action => :newsletters
-    end 
-=end
   end
 
   private
