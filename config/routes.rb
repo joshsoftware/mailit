@@ -2,7 +2,7 @@ Mailit::Application.routes.draw do
 
   match '/unsubscribe/:id' => 'subscribers#unsubscribe', :as => :unsubscribe
  
-  match '/send_mailers/' => 'subscribers#send_mailers', :as => :send_mailers
+  #match '/send_mailers/' => 'subscribers#send_mailers', :as => :send_mailers
  
   match '/newsletters/' => 'subscribers#newsletters', :as => :newsletters
 
