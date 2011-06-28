@@ -19,28 +19,28 @@ describe SubscribersController do
  context "should validate for" do
 
    it "subject and template when no values are provided" do
-       post :send_mailers
+       post :newsletters
        flash[:error].should =="Mailer subject can't be blank, Mailer template can't be blank"
     end
 
    it "subject when not provided" do
-       post :send_mailers,:subject =>'',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test'
+       post :newsletters,:subject =>'',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test'
        flash[:error].should =="Mailer subject can't be blank"
     end
 
 
    it "template when not provided" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>'',:send_mail =>'test'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>'',:send_mail =>'test'
        flash[:error].should =="Mailer template can't be blank"
    end
 
    it "email adress when not provided" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test'
        flash[:error].should =="Please enter all mandatory fields(*)"
    end
 
    it "csv when not provided" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'externaldb'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'externaldb'
        flash[:error].should =="Please enter all mandatory fields(*)"
    end
  end
@@ -48,22 +48,22 @@ describe SubscribersController do
  context "should send" do
   
    it "test mail to single user" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test',:test_email_address=>'joshsoftwaretest1@gmail.com'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test',:test_email_address=>'joshsoftwaretest1@gmail.com'
        flash[:notice].should=="Email sent successfully"
    end
 
    it "test mail to mulitple users" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test',:test_email_address=>'joshsoftwaretest1@gmail.com,joshsoftwaretest2@gmail.com'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'test',:test_email_address=>'joshsoftwaretest1@gmail.com,joshsoftwaretest2@gmail.com'
       flash[:notice].should=="Email sent successfully"
    end    
 
    it "mail to database" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'database'
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'database'
        flash[:notice].should=="Email sent successfully"
    end
 
    it "mail to external database" do
-       post :send_mailers,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'externaldb',:csv_upload =>fixture_file_upload("spec/test.csv", mime_type = nil, binary = false)
+       post :newsletters,:subject =>'TestSubject123',:upload_template =>fixture_file_upload("test.html", mime_type = nil, binary = false),:send_mail =>'externaldb',:csv_upload =>fixture_file_upload("spec/test.csv", mime_type = nil, binary = false)
        flash[:notice].should=="Email sent successfully"
    end
  end
