@@ -21,7 +21,7 @@ class Notifier < ActionMailer::Base
        @code=receiver.unique_identifier
    end
 
-
+=begin
   def massmailer(subject,mailer_template,email,uid)
        setup_email(email )
        #current date value on which mailer will be sent
@@ -29,7 +29,7 @@ class Notifier < ActionMailer::Base
        @subject = subject
        @code=uid
    end
- 
+=end 
    # Same method below can be used for test & final mailers
    protected
    def setup_email(mail)
