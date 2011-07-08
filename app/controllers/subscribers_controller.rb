@@ -84,15 +84,18 @@ class SubscribersController < ApplicationController
   if request.get?
     render
   else
-    @news=Newsletter.new(:mailer_subject => params[:subject],:mailer_template => params[:upload_template], :type_of_mailer => params[:send_mail])
+    @news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail],:sent_at => Time.now )
       if @news.valid?
+         @news.save
+         #get the url of the template to be rendered
+         template_to_render=@news.template.url
           #Test_mailer
           if params[:send_mail] == "test" and !params[:test_email_address].blank?
              #Separate the comma separated email id's
              params[:test_email_address].split(",").each do |email|
              unique_identifier = Digest::MD5.hexdigest(email)
                begin
-                 Notifier.deliver_massmailer(params[:subject], params[:upload_template], email,unique_identifier)
+                 Notifier.deliver_massmailer(params[:subject],template_to_render, email,unique_identifier)
                  flash[:notice] = "Email sent successfully"
                rescue Exception => e
                  puts "Error:=>#{e.message}"
@@ -103,7 +106,7 @@ class SubscribersController < ApplicationController
              count = 0
              Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
                begin
-               Notifier.deliver_massmailer(params[:subject], params[:upload_template], subscriber.email,subscriber.unique_identifier)
+               Notifier.deliver_massmailer(params[:subject], params[:template], subscriber.email,subscriber.unique_identifier)
                flash[:notice] = "Email sent successfully"
                count += 1
                rescue
@@ -119,7 +122,7 @@ class SubscribersController < ApplicationController
                @uploaded_csv.each do |row|
                   unique_identifier = Digest::MD5.hexdigest(row[2])
                   begin
-                    Notifier.deliver_massmailer(params[:subject], params[:upload_template], row[2],unique_identifier)
+                    Notifier.deliver_massmailer(params[:subject], params[:template], row[2],unique_identifier)
                     flash[:notice] = "Email sent successfully"
                   rescue Exception => e
                     puts "Error:=>#{e.message}"
