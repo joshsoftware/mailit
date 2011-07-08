@@ -9,6 +9,8 @@ gem 'mysql2', '0.2.7'
 
 gem "jquery-rails"
 
+gem "paperclip"
+
 group :test do
   gem "rspec-rails", "~> 2.4"
   gem "factory_girl_rails"

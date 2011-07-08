@@ -30,6 +30,7 @@ GEM
     activesupport (3.0.7)
     arel (2.0.10)
     builder (2.1.2)
+    cocaine (0.1.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -48,6 +49,11 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.7)
+    paperclip (2.3.14)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
     polyglot (0.3.1)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -93,5 +99,6 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   mysql2 (= 0.2.7)
+  paperclip
   rails (= 3.0.7)
   rspec-rails (~> 2.4)
