@@ -56,9 +56,9 @@ class SubscribersController < ApplicationController
              begin
                @uploaded_csv=CSV::Reader.parse(params[:csv_upload])
                @uploaded_csv.each do |row|
-                  unique_identifier = Digest::MD5.hexdigest(row[2])
+                  unique_identifier = Digest::MD5.hexdigest(row[0])
                   begin
-                    Notifier.massmailer(params[:subject],template_to_render, row[2],unique_identifier).deliver
+                    Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver
                     flash[:notice] = "Email sent successfully"
                   rescue Exception => e
                     puts "Error:=>#{e.message}"
