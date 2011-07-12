@@ -110,7 +110,7 @@ alt="" width="164px" height="83px" border="0"></a>
      <tr></tr>
      <tr>
      <td>Type of Mailer *</td>
-     <td> <%= select_tag  "send_mail",options_for_select([["Test Mailer","test"],["Existing Database","database",],["External Database","externaldb"]]) %></td>
+     <td> <%= select_tag  "send_mail",options_for_select([["Test Mailer","test"],["Existing Database","database",],["External Database","externaldb"]], :selected => params[:send_mail]) %></td>
      </tr>
      <tr></tr>
      <tr></tr>
@@ -131,7 +131,7 @@ alt="" width="164px" height="83px" border="0"></a>
 
      <tr id="csv_upload_notes"> 
         <td><b>Note:</b> Please ensure that the uploaded file is CSV file only</td>
-        <td> EMAIL ID's are placed in 3RD COL</td>
+        <td>and EMAIL ID's are placed in 1st COL of csv only</td>
       </tr>
      
       <tr></tr>
@@ -154,34 +154,35 @@ alt="" width="164px" height="83px" border="0"></a>
 </form>
 
 <script type="text/javascript">
-            // <![CDATA[
-                 $(document).ready(function () {
-		 $('#send_mail').change(function(){
-                      if($('#send_mail').val() == "test"){
-		      $('#test_mail').show();
-                      $('#ex_db').hide();
-                      $('#csv_upload').hide();
-                      $('#csv_upload_notes').hide();
-		      }
-		      else if($('#send_mail').val() == "externaldb"){
-		      $('#test_mail').hide();
-                      $('#ex_db').hide();
-		      $('#csv_upload').show();
-                      $('#csv_upload_notes').show();
-		      }
-		      else{
-		      $('#test_mail').hide();
-		      $('#csv_upload').hide();
-                      $('#csv_upload_notes').hide();
-                      $('#ex_db').show();    
-		      }
-	              });
-		  });
-                      $('#test_mail').show();
-                      $('#ex_db').hide();
-                      $('#csv_upload').hide();
-                      $('#csv_upload_notes').hide();
-             // ]]>
+  // <![CDATA[
+function set(){
+  if($('#send_mail').val() == "test"){
+    $('#test_mail').show();
+    $('#ex_db').hide();
+    $('#csv_upload').hide();
+    $('#csv_upload_notes').hide();
+  }
+  else if($('#send_mail').val() == "externaldb"){
+    $('#test_mail').hide();
+    $('#ex_db').hide();
+    $('#csv_upload').show();
+    $('#csv_upload_notes').show();
+  }
+  else{
+    $('#test_mail').hide();
+    $('#csv_upload').hide();
+    $('#csv_upload_notes').hide();
+    $('#ex_db').show();    
+  }
+}
+
+set();
+$(document).ready(function () {
+    $('#send_mail').change(function(){
+      set();
+      });
+    });
+// ]]>
 </script>
 
 </div>
@@ -190,22 +191,22 @@ alt="" width="164px" height="83px" border="0"></a>
 </div>
 <!-- Content ends -->  
 <!-- Footer starts -->  
-   <div class="footer" style="background-color:#5685D6; height:70px;width:980px;margin-left:180px">
+<div class="footer" style="background-color:#5685D6; height:70px;width:980px;margin-left:180px">
 
-     <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:370px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
-  
-     <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
-   
-     <a href="http://www.meetup.com/PuneRailsMeetup/" ><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
-  
-   </div>
+  <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:370px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
+
+  <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
+
+  <a href="http://www.meetup.com/PuneRailsMeetup/" ><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
+
+</div>
 <!-- Footer end -->
-    
+
 <!-- Container Ends -->
 <!--</div>-->
 
 <div>
-<!-- back ends -->   
+  <!-- back ends -->   
 
 </body>
 
