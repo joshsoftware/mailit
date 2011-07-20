@@ -3,7 +3,7 @@ require 'csv'
 class SubscribersController < ApplicationController
 
   USER, PASSWORD = 'newsletter', 'josh123'
-  before_filter :authentication_check, :only => [:newsletters]
+  before_filter :authentication_check, :only => [:newsletters,:import_subscribers]
 
             
   #Method to unsubscribe the user from newsletter on the basis of incoming uid
@@ -14,7 +14,25 @@ class SubscribersController < ApplicationController
     render
   end
 
- 
+  def import_subscribers
+    if request.get?
+     render
+    else 
+      if params[:subscriber_csv] == nil
+        flash[:error] = "You must upload CSV file."
+      else
+        begin
+          Subscriber.import(params[:subscriber_csv])
+          flash[:notice] = "Import Successful"
+        rescue Exception => e
+          puts "Error:=>#{e.message}"
+          flash[:error] = "Please upload CSV file only =>#{e.message}"
+        end
+      end
+    end  
+  end
+
+
   def newsletters
 
   if request.get?
