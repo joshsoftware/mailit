@@ -9,7 +9,7 @@ gem 'mysql2', '0.2.7'
 
 gem "jquery-rails"
 
-gem "paperclip"
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 group :test do
   gem "rspec-rails", "~> 2.4"
