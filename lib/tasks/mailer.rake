@@ -9,9 +9,11 @@ namespace :mailer do
              begin
                    Notifier.deliver_massmailer(subscriber)
                    puts "Sending mail to #{subscriber.email} completed"
+                   Rails.logger.info "Sending mail to #{subscriber.email} completed"
                    count += 1
              rescue
                    puts "#{subscriber.login} - Error in sending to #{subscriber.email}"
+                   Rails.logger.info "#{subscriber.login} - Error in sending to #{subscriber.email}"
              end
            end
            puts "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
@@ -22,7 +24,7 @@ namespace :mailer do
      task :verify_mail => :environment do
            count = 0
            #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com","vishwadeep@joshsoftware.com"].each do |mail|
-           ["ninad@joshsoftware.com","gautam@joshsoftware.com"].each do |mail|
+           ["ninad@joshsoftware.com"].each do |mail|
                   user=Subscriber.find_by_email(mail)
                   #Notifier.deliver_test_mail(mail,user.unique_identifier)
                   #Below method will avoid the creation of template test_mail.html.erb under /app/views/notifier   
@@ -30,6 +32,7 @@ namespace :mailer do
                   count +=1
           end
           puts "Mail sent to #{count} users"
+          Rails.logger.info "Mail sent to #{count} users"
      end
 
 end
