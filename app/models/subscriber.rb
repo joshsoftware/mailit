@@ -13,7 +13,7 @@ class Subscriber < ActiveRecord::Base
         self.unique_identifier = Digest::MD5.hexdigest(self.email)
     end
 
-=begin
+
     #Method to import users from csv into db
     def self.import
         #This will be the final csv file including new merged users to be imported into d/b
@@ -29,8 +29,8 @@ class Subscriber < ActiveRecord::Base
           end
         end
     end
-=end
 
+=begin    
     #Method to import users from uploaded csv into db
     def self.import(subscriber_csv)
           @subscriber_list=CSV::Reader.parse(subscriber_csv)
@@ -45,6 +45,7 @@ class Subscriber < ActiveRecord::Base
           end
         end
     end
+=end
 
     #This method will not be required in future. It will only be required for first time to update the flag
     #in the database for un-subscribed users
@@ -65,6 +66,22 @@ class Subscriber < ActiveRecord::Base
        puts "Total un-subscribed users:#{un_subscribe_count}"
     end
 
+
+    #Method to remove bounced email/users from db
+    def self.remove_bounced_users
+       rem_count=0
+        #This will be the i/p csv containing the single column for the email id's of bounced users
+        CSV.open("bounces.csv", "r").each do |row|
+           
+	   user = Subscriber.find_by_email(row[0])
+	   if (user!=nil)
+              #next if not user
+	      user.delete
+              rem_count=rem_count+1
+           end
+	end
+       puts "Total removed users:#{rem_count}"
+    end
 
     def unsubscribe!
 	update_attribute(:is_subscribed, false)
