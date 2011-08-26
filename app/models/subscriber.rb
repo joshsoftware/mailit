@@ -18,12 +18,12 @@ class Subscriber < ActiveRecord::Base
     def self.import
         #This will be the final csv file including new merged users to be imported into d/b
         #CSV.open("finallist_11thmay.csv", "r").each do |row|
-          CSV.open("local_emails.csv", "r").each do |row|
+          CSV.open("bounces.csv", "r").each do |row|
           begin
              next if row.blank?
              Subscriber.create!(:first_name => row[0],
                                 :last_name => row[1],
-                                :email => row[2])
+                                :email => row[3])
           rescue Exception => e
              puts "Error: #{row[2]}: #{e.message}"
           end
