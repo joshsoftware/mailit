@@ -4,8 +4,7 @@ namespace :mailer do
      #Task to be used for sending mailers to sub-scribed users only
      task :send => :environment do
            count = 0
-            #Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
-            Subscriber.limit(1000).where(["is_subscribed = ?", true]).where(['id > ?', ENV['last_sent'] ]).each do |subscriber|
+            Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
              begin
                    Notifier.deliver_massmailer(subscriber)
                    puts "Sending mail to #{subscriber.email} completed"
