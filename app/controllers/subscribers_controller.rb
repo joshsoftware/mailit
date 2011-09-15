@@ -3,7 +3,7 @@ require 'csv'
 class SubscribersController < ApplicationController
 
   USER, PASSWORD = 'newsletter', 'josh123'
-  before_filter :authentication_check, :only => [:newsletters,:import_subscribers]
+  before_filter :authentication_check, :only => [:newsletters,:import_subscribers,:remove_bounced_subscribers]
 
             
   #Method to unsubscribe the user from newsletter on the basis of incoming uid
