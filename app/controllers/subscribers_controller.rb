@@ -23,7 +23,7 @@ class SubscribersController < ApplicationController
       else
         begin
           Subscriber.import(params[:subscriber_csv])
-          flash[:notice] = "Import Successful"
+          flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported"
         rescue Exception => e
           puts "Error:=>#{e.message}"
           flash[:error] = "Please upload CSV file only =>#{e.message}"
@@ -32,6 +32,23 @@ class SubscribersController < ApplicationController
     end  
   end
 
+  def remove_bounced_subscribers
+    if request.get?
+     render
+    else 
+      if params[:bounces_csv] == nil
+        flash[:error] = "You must upload CSV file."
+      else
+        begin
+          Subscriber.remove_bounced_users(params[:bounces_csv])
+          flash[:notice] = "[#{Subscriber.removal_count}] users removed"
+        rescue Exception => e
+          puts "Error:=>#{e.message}"
+          flash[:error] = "Please upload CSV file only =>#{e.message}"
+        end
+      end
+    end  
+  end
 
   def newsletters
 
