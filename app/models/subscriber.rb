@@ -13,13 +13,13 @@ class Subscriber < ActiveRecord::Base
         self.unique_identifier = Digest::MD5.hexdigest(self.email)
     end
 
-
+=begin
     #Method to import users from csv into db
     def self.import
         import_cnt=0
         #This will be the final csv file including new merged users to be imported into d/b
         #CSV.open("finallist_11thmay.csv", "r").each do |row|
-          CSV.open("august_monthlyleads.csv", "r").each do |row|
+          CSV.open("local_emails.csv", "r").each do |row|
           begin
              next if row.blank?
              Subscriber.create!(:first_name => row[0],
@@ -32,10 +32,12 @@ class Subscriber < ActiveRecord::Base
         end
         puts "Total uers imported::#{import_cnt}"  
     end
+=end
 
-=begin    
+
     #Method to import users from uploaded csv into db
     def self.import(subscriber_csv)
+      @@import_cnt=0
           @subscriber_list=CSV::Reader.parse(subscriber_csv)
           @subscriber_list.each do |row|
           begin
@@ -43,12 +45,17 @@ class Subscriber < ActiveRecord::Base
              Subscriber.create!(:first_name => row[0],
                                 :last_name => row[1],
                                 :email => row[2])
+             @@import_cnt+=1
           rescue Exception => e
              puts "Error: #{row[2]}: #{e.message}"
           end
         end
     end
-=end
+   
+    #Method to utilize imported count in controller 
+    def self.import_count
+        @@import_cnt 
+    end
 
     #This method will not be required in future. It will only be required for first time to update the flag
     #in the database for un-subscribed users
@@ -71,19 +78,24 @@ class Subscriber < ActiveRecord::Base
 
 
     #Method to remove bounced email/users from db
-    def self.remove_bounced_users
-       rem_count=0
+    def self.remove_bounced_users(bounces_csv)
+       @@rem_count=0
+       @subscriber_removal_list=CSV::Reader.parse(bounces_csv)
+       @subscriber_removal_list.each do |row|
         #This will be the i/p csv containing the single column for the email id's of bounced users
-        CSV.open("bounces.csv", "r").each do |row|
-           
+        #CSV.open("bounces.csv", "r").each do |row| 
 	   user = Subscriber.find_by_email(row[0])
 	   if (user!=nil)
-              #next if not user
 	      user.delete
-              rem_count=rem_count+1
+              @@rem_count+=1
            end
 	end
-       puts "Total removed users:#{rem_count}"
+       puts "Total removed users:#{@@rem_count}"
+    end
+
+    #Method to utilize removed count in controller 
+    def self.removal_count
+        @@rem_count 
     end
 
     def unsubscribe!
