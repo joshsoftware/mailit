@@ -13,28 +13,6 @@ class Subscriber < ActiveRecord::Base
         self.unique_identifier = Digest::MD5.hexdigest(self.email)
     end
 
-=begin
-    #Method to import users from csv into db
-    def self.import
-        import_cnt=0
-        #This will be the final csv file including new merged users to be imported into d/b
-        #CSV.open("finallist_11thmay.csv", "r").each do |row|
-          CSV.open("local_emails.csv", "r").each do |row|
-          begin
-             next if row.blank?
-             Subscriber.create!(:first_name => row[0],
-                                :last_name => row[1],
-                                :email => row[2])
-             import_cnt+=1
-          rescue Exception => e
-             puts "Error: #{row[2]}: #{e.message}"
-          end
-        end
-        puts "Total uers imported::#{import_cnt}"  
-    end
-=end
-
-
     #Method to import users from uploaded csv into db
     def self.import(subscriber_csv)
       @@import_cnt=0
