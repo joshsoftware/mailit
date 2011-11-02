@@ -10,6 +10,7 @@ class Notifier < ActionMailer::Base
         @code=code_to_unsubscribe
    end
 
+=begin   
    # Method to be used for Final mailer
    # Here the parameter "receiver" will be subscriber-user object
    def massmailer(receiver)
@@ -19,8 +20,8 @@ class Notifier < ActionMailer::Base
        @subject = "Josh Software | Newsletter | #{@dt}"
        @code=receiver.unique_identifier
    end
-
-=begin   
+=end
+   
   def massmailer(subject,mailer_template_to_render,email,uid)
        setup_email(email )
        #current date value on which mailer will be sent
@@ -29,7 +30,7 @@ class Notifier < ActionMailer::Base
        @code=uid
        @tmplte=mailer_template_to_render
   end 
-=end  
+
 
   # Same method below can be used for test & final mailers
   protected
