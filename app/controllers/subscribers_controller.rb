@@ -55,39 +55,21 @@ class SubscribersController < ApplicationController
   if request.get?
     render
   else
-    @news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail],:sent_at => Time.now )
-      if @news.valid?
-         @news.save
+    news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail],:sent_at => Time.now )
+      if news.valid?
+         news.save
          #get the url of the template to be rendered
-         template_to_render=@news.template.url
+         template_to_render=news.template.url
           #Test_mailer
           if params[:send_mail] == "test" and !params[:test_email_address].blank?
-             #Separate the comma separated email id's
-             params[:test_email_address].split(",").each do |email|
-             unique_identifier = Digest::MD5.hexdigest(email)
-               begin
-                 Notifier.massmailer(params[:subject],template_to_render, email,unique_identifier).deliver
-                 flash[:notice] = "Email sent successfully"
-               rescue Exception => e
-                 puts "Error:=>#{e.message}"
-               end  
-             end
+             send_testmailers(news,params[:test_email_address],template_to_render)
           #Mailer to subscribed users in the database
           elsif params[:send_mail] == "database"
-             count = 0
-             Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
-               begin
-               Notifier.massmailer(params[:subject], template_to_render,subscriber.email,subscriber.unique_identifier).deliver
-               flash[:notice] = "Email sent successfully"
-               count += 1
-               rescue
-                puts "#{subscriber.login} - Error in sending to #{subscriber.email}"
-               end
-             end
-             #puts "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
-             #puts "Mail sent to #{count} users"
+             system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
+             flash[:notice] = "Started sending newsletters.Notification will be sent to the provided email,once sending of newsletters to the db is completed "
           #Mailer to external db 
           elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
+            
              begin
                @uploaded_csv=CSV::Reader.parse(params[:csv_upload])
                @uploaded_csv.each do |row|
@@ -103,16 +85,28 @@ class SubscribersController < ApplicationController
                  puts "Error:=>#{e.message}"
                  flash[:error] = "Invalid csv file.Please correct it & try again."
              end  
-
           else
             flash[:error] = "Please enter all mandatory fields(*)"
           end
+      #when newsletter is invalid has some errors in it    
       else
          flash[:error] = @news.errors.full_messages.join(', ')
       end
-
     render :action => :newsletters
   end
+  end
+
+  def send_testmailers(newsletter,tst_email_address,template_to_render)
+    #Separate the comma separated email id's
+    tst_email_address.split(",").each do |email|
+      unique_identifier = Digest::MD5.hexdigest(email)
+      begin
+        Notifier.massmailer(newsletter.mailer_subject,template_to_render,email,unique_identifier).deliver
+        flash[:notice] = "Email sent successfully"
+      rescue Exception => e
+        puts "Error:=>#{e.message}"
+      end  
+    end
   end
 
   private
