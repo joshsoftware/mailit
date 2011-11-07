@@ -45,7 +45,7 @@ namespace :mailer do
   #Task to be used for sending test mailers
   task :verify_mail => :environment do
     count = 0
-    #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com","vishwadeep@joshsoftware.com"].each do |mail|
+    #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com"].each do |mail|
     ["ninad@joshsoftware.com"].each do |mail|
       user=Subscriber.find_by_email(mail)
       #Notifier.deliver_test_mail(mail,user.unique_identifier)
