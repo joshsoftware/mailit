@@ -1,112 +1,79 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-<title>JOSH SOFTWARE PVT. LTD.</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="resource-type" content="document">
-<meta name="audience" content="all">
-<meta name="distribution" content="global">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="robots" content="FOLLOW, INDEX">
-<meta name="revisit-after" content="2 days">
-<meta name="copyright" content="Site Name">
-<meta name="author" content="Site admin Email">
-<meta name="abstract" content="Site description text">
+  <head>
+    <title>JOSH SOFTWARE PVT. LTD.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta name="resource-type" content="document">
+    <meta name="audience" content="all">
+    <meta name="distribution" content="global">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="FOLLOW, INDEX">
+    <meta name="revisit-after" content="2 days">
+    <meta name="copyright" content="Site Name">
+    <meta name="author" content="Site admin Email">
+    <meta name="abstract" content="Site description text">
 
-</head>
+  </head>
 
+  <body>
 
-<body>
+    <!-- back starts -->   
+    <div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:auto;margin-left:250px;padding-bottom:45px;">
+      <br/>
+      <br/>
+      <div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
 
-<!-- back starts -->   
-<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:530px;margin-left:250px;padding-bottom:45px;">
-<br/>
+        <div style="width: 680px; float: left;">
+          <!-- header Starts -->          
+          <%= render 'header' %>
+          <!-- header ends -->          
+        </div> 
 
-<!-- Container Starts -->
+        <!-- index starts -->          
+        <div class="index" style="background-color:#EFEFEF;padding-left:40px;">
+          <strong>Newsletters:</strong>
+          <br/>
+          <br/>
+        </div>
+        <!-- index ends -->          
 
-<br/>
-<div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
+        <!-- Content Starts -->  
+        <div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
+          <br/><br/>
+          <%= form_tag remove_bounced_subscribers_path,:multipart => true %>  
 
-   <div style="width: 680px; float: left;">
+          <div style="background-color:#F2C9C9;text-align:center;">
+            <%= flash[:error] if flash[:error].present?%>
+            <%= flash[:error] =nil %>
+          </div>
 
-    <!-- header Starts -->          
-    <div class="header" style="background-color:white;height:130px;font-size: 11px;">
+          <div style="background-color:#D6CBCB;text-align:center;">
+            <%= flash[:notice] if flash[:notice].present?%>
+            <%= flash[:notice] = nil%>
+          </div>
 
-        <!-- logo Starts -->          
+          <div style="text-align:center;padding-top:30px"> 
+            Upload CSV * <%= file_field_tag  "bounces_csv"%><br/>
+            <div style="font-style:italic;color:#999999"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=Email id's </div>
+          </div>
+          <br/>
+          <%= submit_tag 'Remove',:style =>'background-color:#B5E1F4;margin-left:260px;'%>
+        </form>
 
-	<div class="logo" style="width: 400px; float: left; padding: 20px;"> 
-          <a href="http://www.joshsoftware.com/"><img src="http://www.joshsoftware.com/system/logos/1/layout_1/logo.jpg?1258615261" 
-alt="" width="164px" height="83px" border="0"></a>
-          
-           <strong><i><font size="3">Where Programming is an Art!</font></i></strong> 
-	</div>
-        
-        <!-- logo ends-->         
+        <div style="text-align:center;margin-top:60px;">
+          <a href="/newsletters"> back </a>
+        </div> 
+        <br/>
+      </div>
+      <!-- Content ends -->  
 
-        <!-- ruby Starts -->         
-	
-        <div class="ruby" style="width: 100px; padding: 20px; float: right; text-align:right;"> 
-           <img src="http://www.joshsoftware.com/system/images/39/medium_thumb/ruby_on_rails_logo_3.jpg" border="0">
-	</div>
-
-        <!-- ruby ends -->   
-
+      <!-- Footer starts -->  
+      <%= render 'footer' %>
+      <!-- Footer end -->
     </div>
-    <!-- header ends -->          
-
-  </div>
-
-</div>
-<!-- Content ends -->  
-
-<div style="padding-left:50px;padding-top:150px">
- <div style="background-color:white;width:680px;">  
-   <!-- index starts -->
-   <%= form_tag remove_bounced_subscribers_path,:multipart => true %>  
-       <div style="background-color:#F2C9C9;text-align:center;">
-         <%= flash[:error] if flash[:error].present?%>
-         <%= flash[:error] =nil %>
-       </div>
-
-       <div style="background-color:#D6CBCB;text-align:center;">
-         <%= flash[:notice] if flash[:notice].present?%>
-         <%= flash[:notice] = nil%>
-       </div>
-
-       <div style="text-align:center;padding-top:80px"> 
-         Upload CSV * <%= file_field_tag  "bounces_csv"%><br/>
-       <div style="font-style:italic;color:#999999"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=Email id's </div>
-     </div>
-     <br/>
-     <%= submit_tag 'Remove',:style =>'background-color:#B5E1F4;margin-left:300px;'%>
-  </form>
-  
-       <div style="text-align:center;margin-top:90px;">
-         <a href="/newsletters">Send Newsletters >> </a>
-      </div>  
-     <br/><br/>
- </div>
-</div>
-<!-- Footer starts -->  
-   <div class="footer" style="background-color:#5685D6; height:70px;margin-top:60px;">
-
-     <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:270px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
-  
-     <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
-   
-     <a href="http://www.meetup.com/PuneRailsMeetup/" ><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
-  
-   </div>
-<!-- Footer end -->
-    
-<!-- Container Ends -->
-</div>
-
-<div>
-<!-- back ends -->   
-
+    <!-- Container Ends -->
+  </div> 
 </body>
-
 </html>
