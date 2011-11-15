@@ -3,7 +3,7 @@ require 'csv'
 class SubscribersController < ApplicationController
 
   USER, PASSWORD = 'newsletter', 'josh123'
-  before_filter :authentication_check, :only => [:newsletters,:import_subscribers,:remove_bounced_subscribers]
+  before_filter :authentication_check, :only => [:newsletters,:import_subscribers,:remove_bounced_subscribers,:send_newsletters]
 
             
   #Method to unsubscribe the user from newsletter on the basis of incoming uid
@@ -50,7 +50,7 @@ class SubscribersController < ApplicationController
     end  
   end
 
-  def newsletters
+  def send_newsletters
 
   if request.get?
     render
@@ -90,9 +90,9 @@ class SubscribersController < ApplicationController
           end
       #when newsletter is invalid has some errors in it    
       else
-         flash[:error] = @news.errors.full_messages.join(', ')
+         flash[:error] = news.errors.full_messages.join(', ')
       end
-    render :action => :newsletters
+    render :action => :send_newsletters
   end
   end
 
