@@ -1,6 +1,8 @@
 Mailit::Application.routes.draw do
 
   root :to => "home#index"
+  
+  match '/add_to_index/' => 'home#add_to_index', :as => :add_to_index
 
   match '/unsubscribe/:id' => 'subscribers#unsubscribe', :as => :unsubscribe
   
