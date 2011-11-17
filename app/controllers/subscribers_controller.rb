@@ -67,6 +67,9 @@ class SubscribersController < ApplicationController
           elsif params[:send_mail] == "database"
              system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
              flash[:notice] = "Started sending newsletters.Notification will be sent to the provided email,once sending of newsletters to the db is completed"
+             #Add Month to index on home page
+             index=Homeindex.new(:month => news.created_at.strftime("%B_%G"))
+             index.save
           #Mailer to external db 
           elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
             
