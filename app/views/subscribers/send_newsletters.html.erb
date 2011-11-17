@@ -107,7 +107,6 @@
                 <td>the SUBSCRIBED-USERS only from the existing database</td>
               </tr>
 
-
               <tr></tr>
 
               <tr id="csv_upload">
@@ -119,7 +118,13 @@
                 <td><b>Note:</b> Please ensure that the uploaded file is CSV file only</td>
                 <td>and EMAIL ID's are placed in 1st COL of csv only</td>
               </tr>
+              <tr></tr>
+              <tr></tr>
 
+              <tr id="notify_mail">
+                <td>Enter notification email *</td>
+                <td style="font-style:italic;color:#999999"><%= text_field_tag "notification_email", params[:notification_email] %> </td>
+              </tr>
               <tr></tr>
               <tr></tr>
               <tr></tr>
@@ -145,18 +150,21 @@
             $('#ex_db').hide();
             $('#csv_upload').hide();
             $('#csv_upload_notes').hide();
+            $('#notify_mail').hide();
           }
           else if($('#send_mail').val() == "externaldb"){
             $('#test_mail').hide();
             $('#ex_db').hide();
             $('#csv_upload').show();
             $('#csv_upload_notes').show();
+            $('#notify_mail').show();
           }
           else{
             $('#test_mail').hide();
             $('#csv_upload').hide();
             $('#csv_upload_notes').hide();
             $('#ex_db').show();    
+            $('#notify_mail').show();
           }
         }
 
