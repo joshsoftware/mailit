@@ -96,6 +96,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.28)
+    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -107,3 +108,4 @@ DEPENDENCIES
   paperclip!
   rails (= 3.0.7)
   rspec-rails (~> 2.4)
+  will_paginate (~> 3.0)
