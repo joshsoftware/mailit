@@ -11,6 +11,8 @@ gem "jquery-rails"
 
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
+gem 'will_paginate', '~> 3.0'
+
 group :test do
   gem "rspec-rails", "~> 2.4"
   gem "factory_girl_rails"
