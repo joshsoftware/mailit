@@ -55,7 +55,8 @@ class SubscribersController < ApplicationController
   if request.get?
     render
   else
-    news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail])
+    news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail], 
+                        :notify_email => params[:notification_email])
       if news.valid?
          news.save
          #get the url of the template to be rendered
@@ -66,7 +67,7 @@ class SubscribersController < ApplicationController
           #Mailer to subscribed users in the database
           elsif params[:send_mail] == "database"
              system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
-             flash[:notice] = "Started sending newsletters.Notification will be sent to the provided email,once sending of newsletters to the db is completed"
+             flash[:notice] = "Started sending newsletters. You will be notified upon completion."
              #Add Month to index on home page
              index=Homeindex.new(:month => news.created_at.strftime("%B_%G"))
              index.save
