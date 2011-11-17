@@ -39,7 +39,12 @@ namespace :mailer do
     end
     Rails.logger.info "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
     Rails.logger.info "Mail sent to #{count} users"
-    Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,"ninad@joshsoftware.com","").deliver
+    #send completion notification email to specified email id's
+    if !@newsletter.notify_email.blank?
+        @newsletter.notify_email.split(",").each do |email|
+            Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
+        end  
+    end
   end
 
   #Task to be used for sending test mailers
