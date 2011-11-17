@@ -41,43 +41,15 @@
 
           <!-- Content Starts -->  
           <div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
-            <br/><br/>
-            <b><a href="http://mailit.joshsoftware.com/April2011_Newsletter" target="_blank" style="color:black;">April_2011</a></b>
 
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/May2011_Newsletter" target="_blank" style="color:black;">May_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/June2011_Newsletter" target="_blank" style="color:black;">June_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/July2011_Newsletter" target="_blank" style="color:black;">July_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/August2011_Newsletter" target="_blank" style="color:black;">August_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/September2011_Newsletter" target="_blank" style="color:black;">September_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <b><a href="http://mailit.joshsoftware.com/October2011_Newsletter" target="_blank" style="color:black;">October_2011</a></b>
-
-            <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-
-            <% if (@home_index_list != nil) %>
-              <% @home_index_list.each do |index| %>
-                <b><a href= "http://mailit.joshsoftware.com/<%= index.month.gsub("_","") %>_Newsletter" target="_blank" style="color:black;"><%= index.month %></a></b>
-                <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
-              <% end %>
+            <p>
+            <% @home_index_list.each do |index| %>
+              <b><a href= "http://mailit.joshsoftware.com/<%= index.month.gsub("_","") %>_Newsletter" target="_blank" style="color:black;"><%= index.month %></a></b>
+              <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
             <% end %>
-            <br/>
+            </p>
 
+            <p> <div class="pagination" style="text-align:center;"> <%= will_paginate @home_index_list %> </div> </p>
           </div>
           <!-- Content ends -->  
 
