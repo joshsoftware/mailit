@@ -72,7 +72,7 @@
 
             <% if (@home_index_list != nil) %>
               <% @home_index_list.each do |index| %>
-                <b><a href= "http://mailit.joshsoftware.com/<%= index.month %>_Newsletter" target="_blank" style="color:black;"><%= index.month %></a></b>
+                <b><a href= "http://mailit.joshsoftware.com/<%= index.month.gsub("_","") %>_Newsletter" target="_blank" style="color:black;"><%= index.month %></a></b>
                 <hr noshade style="color: #AFAFAF;height: 3px;background-color: #AFAFAF;"></hr>
               <% end %>
             <% end %>
