@@ -32,3 +32,5 @@ end
      controller.stub!(:authentication_check).and_return(true)
  end
 
+ #Below line is required to use method fixture_file_upload in factories
+ include ActionDispatch::TestProcess
