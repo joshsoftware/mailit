@@ -3,8 +3,7 @@ require 'csv'
 class SubscribersController < ApplicationController
 
   USER, PASSWORD = 'newsletter', 'josh123'
-  before_filter :authentication_check, :only => [:newsletters,:import_subscribers,:remove_bounced_subscribers,:send_newsletters]
-
+  before_filter :authentication_check, :only => [:import_subscribers,:remove_bounced_subscribers]
 
   #Method to unsubscribe the user from newsletter on the basis of incoming uid
   def unsubscribe
@@ -50,6 +49,7 @@ class SubscribersController < ApplicationController
     end  
   end
 
+=begin  
   def send_newsletters
 
     if request.get?
@@ -109,6 +109,7 @@ class SubscribersController < ApplicationController
       end  
     end
   end
+=end
 
   private
   def authentication_check
