@@ -1,16 +1,16 @@
 Mailit::Application.routes.draw do
 
-  root :to => "newsletter#index"
+  root :to => "newsletters#index"
   
   match '/unsubscribe/:id' => 'subscribers#unsubscribe', :as => :unsubscribe
   
-  match '/newsletters/' => 'subscribers#newsletters', :as => :newsletters
+  match '/newsletters/' => 'newsletters#newsletters', :as => :newsletters
   
   match '/import_subscribers/' => 'subscribers#import_subscribers', :as => :import_subscribers
 
   match '/remove_bounced_subscribers/' => 'subscribers#remove_bounced_subscribers', :as => :remove_bounced_subscribers
 
-  match '/send_newsletters/' => 'subscribers#send_newsletters', :as => :send_newsletters
+  match '/send_newsletters/' => 'newsletters#send_newsletters', :as => :send_newsletters
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
