@@ -1,5 +1,7 @@
 class NewslettersController < ApplicationController
 
+  before_filter :authentication_check, :only => [:manage,:send_newsletters]
+
   def index
     @news_index_list=Newsletter.where(:type_of_mailer =>"database").paginate(:page => params[ :page ],:per_page => 10).order('created_at DESC')
   end
@@ -8,7 +10,6 @@ class NewslettersController < ApplicationController
   end
 
   def send_newsletters
-
     if request.get?
       render
     else
