@@ -4,7 +4,7 @@ Mailit::Application.routes.draw do
   
   match '/unsubscribe/:id' => 'subscribers#unsubscribe', :as => :unsubscribe
   
-  match '/newsletters/' => 'newsletters#newsletters', :as => :newsletters
+  match '/newsletters/manage' => 'newsletters#manage', :as => :newsletters
   
   match '/import_subscribers/' => 'subscribers#import_subscribers', :as => :import_subscribers
 
