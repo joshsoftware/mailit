@@ -25,7 +25,7 @@ class NewslettersController < ApplicationController
           #Mailer to subscribed users in the database
         elsif params[:send_mail] == "database"
           system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
-          flash[:notice] = "Started sending newsletters. You will be notified upon completion."
+          flash[:notice] = I18n.t('notice.newsletter_sending_started')
           #Mailer to external db 
         elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
 
@@ -35,17 +35,17 @@ class NewslettersController < ApplicationController
               unique_identifier = Digest::MD5.hexdigest(row[0])
               begin
                 Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver
-                flash[:notice] = "Email sent successfully"
+                flash[:notice] = I18n.t('notice.newsletter_sent_success')
               rescue Exception => e
                 puts "Error:=>#{e.message}"
               end  
             end
           rescue Exception => e
             puts "Error:=>#{e.message}"
-            flash[:error] = "Invalid csv file.Please correct it & try again."
+            flash[:error] = I18n.t('error.invalid_csv')
           end  
         else
-          flash[:error] = "Please enter all mandatory fields(*)"
+          flash[:error] = I18n.t('error.all_mandatory_fields')
         end
         #when newsletter is invalid has some errors in it    
       else
@@ -61,7 +61,7 @@ class NewslettersController < ApplicationController
       unique_identifier = Digest::MD5.hexdigest(email)
       begin
         Notifier.massmailer(newsletter.mailer_subject,template_to_render,email,unique_identifier).deliver
-        flash[:notice] = "Email sent successfully"
+        flash[:notice] = I18n.t('notice.newsletter_sent_success')
       rescue Exception => e
         puts "Error:=>#{e.message}"
       end
