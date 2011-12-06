@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-$email_success_notification = "Email sent successfully"
+$email_success_notification = "Newsletter sent successfully"
 $db_email_success_notification = "Started sending newsletters. You will be notified upon completion."
 
 describe NewslettersController do
@@ -61,8 +61,16 @@ describe NewslettersController do
         :send_mail =>'test',:test_email_address=>'joshsoftwaretest1@gmail.com,joshsoftwaretest2@gmail.com'
       flash[:notice].should==$email_success_notification
       ActionMailer::Base.deliveries.should_not be_empty
-      ActionMailer::Base.deliveries.count == 2
+      ActionMailer::Base.deliveries.count.should == 2
     end    
+
+    it "mail to external database" do
+      post :send_newsletters,:subject =>'TestSubject123',:template =>fixture_file_upload("spec/test.html", mime_type = nil, binary = false),
+        :send_mail =>'externaldb',:csv_upload =>fixture_file_upload("spec/test.csv", mime_type = nil, binary = false)
+      flash[:notice].should==$email_success_notification
+      #Below the delivery count is checked as 1 because the input file "test.csv" provided above contains only one email
+      ActionMailer::Base.deliveries.count.should == 1
+    end
 
 =begin    
     #We cannot validate this scenario using "ActionMailer::Base.deliveries" as this triggers rake task in the background
@@ -72,11 +80,6 @@ describe NewslettersController do
     end
 =end
 
-it "mail to external database" do
-      post :send_newsletters,:subject =>'TestSubject123',:template =>fixture_file_upload("spec/test.html", mime_type = nil, binary = false),
-        :send_mail =>'externaldb',:csv_upload =>fixture_file_upload("spec/test.csv", mime_type = nil, binary = false)
-      flash[:notice].should=="Email sent successfully"
-    end
   end
 
 end
