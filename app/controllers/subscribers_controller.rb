@@ -20,8 +20,12 @@ class SubscribersController < ApplicationController
         flash[:error] = I18n.t('error.csv_upload')
       else
         begin
-          Subscriber.import(params[:subscriber_csv])
-          flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported"
+          import_status = Subscriber.import(params[:subscriber_csv])
+          if import_status.blank?
+            flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported"
+          else
+            flash[:error] = I18n.t('error.invalid_csv_upload')          
+          end  
         rescue Exception => e
           flash[:error] = I18n.t('error.csv_upload_only')
         end
