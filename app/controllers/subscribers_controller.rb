@@ -23,7 +23,6 @@ class SubscribersController < ApplicationController
           Subscriber.import(params[:subscriber_csv])
           flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported"
         rescue Exception => e
-          puts "Error:=>#{e.message}"
           flash[:error] = I18n.t('error.csv_upload_only')
         end
       end
@@ -41,7 +40,6 @@ class SubscribersController < ApplicationController
           Subscriber.remove_bounced_users(params[:bounces_csv])
           flash[:notice] = "[#{Subscriber.removal_count}] users removed"
         rescue Exception => e
-          puts "Error:=>#{e.message}"
           flash[:error] = I18n.t('error.csv_upload_only')
         end
       end
