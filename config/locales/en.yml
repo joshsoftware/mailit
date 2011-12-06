@@ -5,6 +5,7 @@ en:
   error:
        csv_upload: "You must upload CSV file"
        csv_upload_only: "Please upload CSV file only"
+       invalid_csv_upload: "Uploaded CSV file is not in the correct format"
        invalid_csv: "Invalid CSV file. Please correct it & try again."
        all_mandatory_fields: "Please enter all mandatory fields(*)"
   notice:
