@@ -32,7 +32,7 @@ describe Newsletter do
     end
 
     it "with default mailer_status as sending" do
-      news.mailer_status.should == "sending" 
+      news.mailer_status.should eq("sending") 
     end
   end
 
