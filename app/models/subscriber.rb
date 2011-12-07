@@ -51,32 +51,33 @@ class Subscriber < ActiveRecord::Base
         un_subscribe_count=un_subscribe_count+1
       end
     end
-    puts "Total un-subscribed users:#{un_subscribe_count}"
+    #puts "Total un-subscribed users:#{un_subscribe_count}"
   end
 
 
   #Method to remove bounced email/users from db
   def self.remove_bounced_users(bounces_csv)
     @@rem_count=0
-       @subscriber_removal_list=CSV::Reader.parse(bounces_csv)
-       @subscriber_removal_list.each do |row|
-        #This will be the i/p csv containing the single column for the email id's of bounced users
-        #CSV.open("bounces.csv", "r").each do |row| 
-	   user = Subscriber.find_by_email(row[0])
-	   if (user!=nil)
-	      user.delete
-              @@rem_count+=1
-           end
-	end
-       puts "Total removed users:#{@@rem_count}"
+    @subscriber_removal_list=CSV::Reader.parse(bounces_csv)
+    @subscriber_removal_list.each do |row|
+      begin
+        user = Subscriber.find_by_email(row[0])
+        if (user!=nil)
+          user.delete
+          @@rem_count+=1
+        end
+      rescue Exception => e
+        return "#{e.message}"
+      end
     end
+  end
 
-    #Method to utilize removed count in controller 
-    def self.removal_count
-        @@rem_count 
-    end
+  #Method to utilize removed count in controller 
+  def self.removal_count
+    @@rem_count 
+  end
 
-    def unsubscribe!
-	update_attribute(:is_subscribed, false)
-    end
+  def unsubscribe!
+    update_attribute(:is_subscribed, false)
+  end
 end
