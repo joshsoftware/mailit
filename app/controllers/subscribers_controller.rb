@@ -1,5 +1,3 @@
-require 'csv'
-
 class SubscribersController < ApplicationController
 
   before_filter :authentication_check, :only => [:import_subscribers,:remove_bounced_subscribers]
