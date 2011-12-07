@@ -1,83 +1,60 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-  <head>
-    <title>JOSH SOFTWARE PVT. LTD.</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <meta name="resource-type" content="document">
-    <meta name="audience" content="all">
-    <meta name="distribution" content="global">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="robots" content="FOLLOW, INDEX">
-    <meta name="revisit-after" content="2 days">
-    <meta name="copyright" content="Site Name">
-    <meta name="author" content="Site admin Email">
-    <meta name="abstract" content="Site description text">
+<!-- back starts -->   
+<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:auto;margin-left:250px;padding-bottom:45px;">
+  <br/>
+  <br/>
+  <div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
 
-  </head>
+    <div style="width: 680px; float: left;">
+      <!-- header Starts -->          
+      <%= render 'header' %>
+      <!-- header ends -->          
+    </div>
 
-  <!--<body style="background-color:#A4FF9F;">-->
-    <body>
+    <!-- index starts -->          
+    <div class="index" style="background-color:#EFEFEF;padding-left:40px;">
+      <strong>Newsletters:</strong>
+      <br/>
+      <br/>
+    </div>
+    <!-- index ends -->          
 
-      <!-- back starts -->   
-      <div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:auto;margin-left:250px;padding-bottom:45px;">
-        <br/>
-        <br/>
-        <div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
+    <!-- Content Starts -->  
+    <div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
 
-          <div style="width: 680px; float: left;">
-            <!-- header Starts -->          
-            <%= render 'header' %>
-            <!-- header ends -->          
-          </div>
+      <br/><br/>
 
-          <!-- index starts -->          
-          <div class="index" style="background-color:#EFEFEF;padding-left:40px;">
-            <strong>Newsletters:</strong>
-            <br/>
-            <br/>
-          </div>
-          <!-- index ends -->          
+      <%= form_tag import_subscribers_path,:multipart => true %>  
 
-          <!-- Content Starts -->  
-          <div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
-
-            <br/><br/>
-
-            <%= form_tag import_subscribers_path,:multipart => true %>  
-
-            <div style="background-color:#F2C9C9;text-align:center;">
-              <%= flash[:error] if flash[:error].present?%>
-              <%= flash[:error] =nil %>
-            </div>
-
-            <div style="background-color:#D6CBCB;text-align:center;">
-              <%= flash[:notice] if flash[:notice].present?%>
-              <%= flash[:notice] = nil%>
-            </div>
-
-            <div style="text-align:center;padding-top:30px"> 
-              Upload CSV * <%= file_field_tag  "subscriber_csv"%><br/>
-              <div style="font-style:italic;color:#999999"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=First Name,2nd col=Last Name,3rd col=Email </div>
-            </div>
-            <br/>
-            <%= submit_tag 'Import',:style =>'background-color:#B5E1F4;margin-left:260px;'%>
-          </form>
-
-          <div style="text-align:center;margin-top:60px;">
-            <a href="/newsletters/manage"> back </a>
-          </div> 
-
-          <br/>
-        </div>
-        <!-- Content ends -->  
-
-        <!-- Footer starts -->  
-        <%= render 'footer' %>
-        <!-- Footer end -->
+      <div style="background-color:#F2C9C9;text-align:center;">
+        <%= flash[:error] if flash[:error].present?%>
+        <%= flash[:error] =nil %>
       </div>
-      <!-- Container Ends -->
+
+      <div style="background-color:#D6CBCB;text-align:center;">
+        <%= flash[:notice] if flash[:notice].present?%>
+        <%= flash[:notice] = nil%>
+      </div>
+
+      <div style="text-align:center;padding-top:30px"> 
+        Upload CSV * <%= file_field_tag  "subscriber_csv"%><br/>
+        <div style="font-style:italic;color:#999999"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=First Name,2nd col=Last Name,3rd col=Email </div>
+      </div>
+      <br/>
+      <%= submit_tag 'Import',:style =>'background-color:#B5E1F4;margin-left:260px;'%>
+    </form>
+
+    <div style="text-align:center;margin-top:60px;">
+      <a href="/newsletters/manage"> back </a>
     </div> 
-  </body>
-</html>
+
+    <br/>
+  </div>
+  <!-- Content ends -->  
+
+  <!-- Footer starts -->  
+  <%= render 'footer' %>
+  <!-- Footer end -->
+</div>
+<!-- Container Ends -->
+</div> 
