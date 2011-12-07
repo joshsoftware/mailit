@@ -41,8 +41,12 @@ class SubscribersController < ApplicationController
         flash[:error] = I18n.t('error.csv_upload')
       else
         begin
-          Subscriber.remove_bounced_users(params[:bounces_csv])
-          flash[:notice] = "[#{Subscriber.removal_count}] users removed"
+          removal_status = Subscriber.remove_bounced_users(params[:bounces_csv])
+          if removal_status.blank?
+            flash[:notice] = "[#{Subscriber.removal_count}] users removed"
+          else
+            flash[:error] = I18n.t('error.invalid_csv_upload')          
+          end  
         rescue Exception => e
           flash[:error] = I18n.t('error.csv_upload_only')
         end
