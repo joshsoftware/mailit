@@ -1,12 +1,11 @@
+require 'csv'
+
 class NewslettersController < ApplicationController
 
   before_filter :authentication_check, :only => [:manage,:send_newsletters]
 
   def index
     @news_index_list=Newsletter.where(:type_of_mailer =>"database").paginate(:page => params[ :page ],:per_page => 10).order('created_at DESC')
-  end
-
-  def manage
   end
 
   def send_newsletters
@@ -28,22 +27,7 @@ class NewslettersController < ApplicationController
           flash[:notice] = I18n.t('notice.newsletter_sending_started')
           #Mailer to external db 
         elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
-
-          begin
-            @uploaded_csv=CSV::Reader.parse(params[:csv_upload])
-            @uploaded_csv.each do |row|
-              unique_identifier = Digest::MD5.hexdigest(row[0])
-              begin
-                Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver
-                flash[:notice] = I18n.t('notice.newsletter_sent_success')
-              rescue Exception => e
-                puts "Error:=>#{e.message}"
-              end  
-            end
-          rescue Exception => e
-            puts "Error:=>#{e.message}"
-            flash[:error] = I18n.t('error.invalid_csv')
-          end  
+          external_database_mailer(news,params[:csv_upload],template_to_render)
         else
           flash[:error] = I18n.t('error.all_mandatory_fields')
         end
@@ -65,6 +49,20 @@ class NewslettersController < ApplicationController
       rescue Exception => e
         puts "Error:=>#{e.message}"
       end
+    end
+  end
+
+  def external_database_mailer(newsletter,uploaded_csv,template_to_render)
+    begin
+      external_users=CSV::Reader.parse(uploaded_csv)
+      external_users.each do |row|
+        unique_identifier = Digest::MD5.hexdigest(row[0])
+        Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver
+        flash[:notice] = I18n.t('notice.newsletter_sent_success')
+      end
+    rescue Exception => e
+      puts "Error:=>#{e.message}"
+      flash[:error] = I18n.t('error.invalid_csv')
     end
   end
 
