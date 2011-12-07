@@ -16,16 +16,13 @@ class SubscribersController < ApplicationController
     if request.get?
       render
     else 
-      if params[:subscriber_csv] == nil
+      if params[:subscriber_csv].blank?
         flash[:error] = I18n.t('error.csv_upload')
       else
         begin
           import_status = Subscriber.import(params[:subscriber_csv])
-          if import_status.blank?
-            flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported"
-          else
-            flash[:error] = I18n.t('error.invalid_csv_upload')          
-          end  
+          import_status.blank? ? flash[:notice] = "Import Successful. [#{Subscriber.import_count}] users imported" : 
+            flash[:error] = I18n.t('error.invalid_csv_upload')
         rescue Exception => e
           flash[:error] = I18n.t('error.csv_upload_only')
         end
@@ -37,16 +34,13 @@ class SubscribersController < ApplicationController
     if request.get?
       render
     else 
-      if params[:bounces_csv] == nil
+      if params[:bounces_csv].blank?
         flash[:error] = I18n.t('error.csv_upload')
       else
         begin
           removal_status = Subscriber.remove_bounced_users(params[:bounces_csv])
-          if removal_status.blank?
-            flash[:notice] = "[#{Subscriber.removal_count}] users removed"
-          else
-            flash[:error] = I18n.t('error.invalid_csv_upload')          
-          end  
+          removal_status.blank? ? flash[:notice] = "[#{Subscriber.removal_count}] users removed" :
+            flash[:error] = I18n.t('error.invalid_csv_upload')
         rescue Exception => e
           flash[:error] = I18n.t('error.csv_upload_only')
         end
