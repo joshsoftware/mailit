@@ -43,9 +43,7 @@ class Subscriber < ActiveRecord::Base
     CSV.open("my_unsubscribelist.csv", "r").each do |row|
 
       user = Subscriber.find_by_email(row[0])
-      if (user!=nil)
-        #next if not user
-        puts user.email
+      if user.blank?
         user.unsubscribe!
         user.save!
         un_subscribe_count=un_subscribe_count+1
@@ -62,7 +60,7 @@ class Subscriber < ActiveRecord::Base
     @subscriber_removal_list.each do |row|
       begin
         user = Subscriber.find_by_email(row[0])
-        if (user!=nil)
+        if user.blank?
           user.delete
           @@rem_count+=1
         end
