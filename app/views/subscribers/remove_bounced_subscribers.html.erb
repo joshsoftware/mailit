@@ -1,48 +1,48 @@
 
 <!-- back starts -->   
-<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:780px;height:auto;margin-left:250px;padding-bottom:45px;">
+<div class="back">
   <br/>
   <br/>
-  <div style="text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#FFFFFF;">
+  <div class="back1">
 
-    <div style="width: 680px; float: left;">
+    <div class="back2">
       <!-- header Starts -->          
       <%= render 'header' %>
       <!-- header ends -->          
     </div> 
 
     <!-- index starts -->          
-    <div class="index" style="background-color:#EFEFEF;padding-left:40px;">
+    <div class="index">
       <strong>Newsletters:</strong>
-      <br/>
-      <br/>
+      <br/><br/>
     </div>
     <!-- index ends -->          
 
     <!-- Content Starts -->  
-    <div class="content" style="width: 600px; padding-left:40px; text-align:justify;">  
-      <br/><br/>
+    <div class="content">  
+      <p>
       <%= form_tag remove_bounced_subscribers_path,:multipart => true %>  
 
-      <div style="background-color:#F2C9C9;text-align:center;">
+      <div class="error">
         <%= flash[:error] if flash[:error].present?%>
         <%= flash[:error] =nil %>
       </div>
 
-      <div style="background-color:#D6CBCB;text-align:center;">
+      <div class="notice">
         <%= flash[:notice] if flash[:notice].present?%>
         <%= flash[:notice] = nil%>
       </div>
 
       <div style="text-align:center;padding-top:30px"> 
         Upload CSV * <%= file_field_tag  "bounces_csv"%><br/>
-        <div style="font-style:italic;color:#999999"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=Email id's </div>
+        <div class="note"><b> Note:</b> Only CSV file is allowed. It should be in format: 1st col=Email id's </div>
       </div>
       <br/>
-      <%= submit_tag 'Remove',:style =>'background-color:#B5E1F4;margin-left:260px;'%>
+      <%= submit_tag 'Remove',:class =>'submit_btn'%>
     </form>
+    </p>
 
-    <div style="text-align:center;margin-top:60px;">
+    <div class="back_btn">
       <a href="/newsletters/manage"> back </a>
     </div> 
     <br/>
