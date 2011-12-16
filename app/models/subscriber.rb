@@ -25,7 +25,7 @@ class Subscriber < ActiveRecord::Base
                            :email => row[2])
         @@import_cnt+=1
       rescue Exception => e
-        return "#{e.message}"
+        puts "#{e.message}"
       end
     end
   end
@@ -60,12 +60,12 @@ class Subscriber < ActiveRecord::Base
     @subscriber_removal_list.each do |row|
       begin
         user = Subscriber.find_by_email(row[0])
-        if user.blank?
+        unless user.blank?
           user.delete
           @@rem_count+=1
         end
       rescue Exception => e
-        return "#{e.message}"
+        puts "#{e.message}"
       end
     end
   end
