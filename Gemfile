@@ -1,17 +1,22 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '0.2.7'
-
-gem "jquery-rails"
+gem 'mysql2',  '>=0.3'
 
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 gem 'will_paginate', '~> 3.0'
+
+group :assets do
+  gem "sass-rails"
+  gem 'jquery-rails'
+  gem 'uglifier'
+  gem 'coffee-rails'
+end
 
 group :test do
   gem "rspec-rails", "~> 2.4"
