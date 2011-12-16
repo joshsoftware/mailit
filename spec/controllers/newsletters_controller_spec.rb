@@ -16,7 +16,7 @@ describe NewslettersController do
   context "should validate for" do
     it "subject and template when no values are provided" do
       post :send_newsletters
-      flash[:error].should eq("Mailer subject can't be blank, Template file name must be set")
+      flash[:error].should eq("Mailer subject can't be blank, Template must be uploaded, Template file name must be uploaded")
       ActionMailer::Base.deliveries.should be_empty
     end
 
@@ -28,7 +28,7 @@ describe NewslettersController do
 
     it "template when not provided" do
       post :send_newsletters,:subject =>'TestSubject123',:template =>'',:send_mail =>'test'
-      flash[:error].should eq("Template file name must be set")
+      flash[:error].should eq("Template must be uploaded, Template file name must be uploaded")
       ActionMailer::Base.deliveries.should be_empty
     end 
 
