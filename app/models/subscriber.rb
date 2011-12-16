@@ -25,7 +25,6 @@ class Subscriber < ActiveRecord::Base
                            :email => row[2])
         @@import_cnt+=1
       rescue Exception => e
-        puts "#{e.message}"
       end
     end
   end
@@ -65,7 +64,6 @@ class Subscriber < ActiveRecord::Base
           @@rem_count+=1
         end
       rescue Exception => e
-        puts "#{e.message}"
       end
     end
   end
