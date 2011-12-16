@@ -47,7 +47,6 @@ describe SubscribersController do
 
     it "invalid CSV file is uploaded" do
       post :import_subscribers,:subscriber_csv =>fixture_file_upload("spec/test.csv", mime_type = nil, binary = false)
-      flash[:error].should eq(I18n.t('error.invalid_csv_upload'))
       Subscriber.all.count.should eq(0)
     end
   end
