@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  USER, PASSWORD = 'newsletter', 'josh123#'
+  USER, PASSWORD = '', ''
 
   private
   def authentication_check
