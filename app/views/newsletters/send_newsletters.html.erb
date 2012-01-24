@@ -1,6 +1,6 @@
 
 <!-- back starts -->   
-<div class="back" style="font-family: Arial,sans-serif; color:black; font-size: 12px;text-align:justify;background-color:#E0ECFF;width:980px;height:auto;margin-left:180px;padding-bottom:45px;">
+<div class="back" style="width:980px;margin-left:180px;">
   <br/>
   <br/>
 
@@ -9,7 +9,7 @@
   </div>
 
   <!-- index starts -->
-  <div class="index" style="background-color:#EFEFEF;padding-left:40px;margin-left:40px;width:840px;">
+  <div class="index" style="margin-left:40px;width:840px;">
     <strong>Newsletters:</strong>
     <br/>
     <br/>
@@ -17,18 +17,18 @@
   <!-- index ends --> 
 
   <!-- Content Starts -->  
-  <div class="content" style="width: 700px; padding-left:40px;text-align:justify;">  
+  <div class="content" style="width: 700px;">  
 
-    <div style="background-color:white;width:880px;">
+    <div class="newsletter">
 
       <%= form_tag send_newsletters_path,:multipart => true %>
 
-      <div style="background-color:#F2C9C9;text-align:center;">
+      <div class="error">
         <%= flash[:error] if flash[:error].present?%>
         <%= flash[:error] =nil %>
       </div>
 
-      <div style="background-color:#D6CBCB;text-align:center;">
+      <div class="notice">
         <%= flash[:notice] if flash[:notice].present?%>
         <%= flash[:notice] = nil%>
       </div>
@@ -47,7 +47,7 @@
           <tr></tr>
           <tr>
             <td>Mailer Subject *</td>
-            <td style="font-style:italic;color:#999999"><%= text_field_tag "subject", params[:subject] %>  e.g Josh Software | Newsletter | June 2011 </td>
+            <td class="fld_help"><%= text_field_tag "subject", params[:subject] %>  e.g Josh Software | Newsletter | June 2011 </td>
           </tr>
           <tr></tr>
           <tr></tr>
@@ -57,7 +57,7 @@
           <tr></tr>
           <tr>
             <td>Upload Mailer Template *</td>
-            <td style="font-style:italic;color:#999999"> <%= file_field_tag  "template"%>  should be .html</td>
+            <td class="fld_help"> <%= file_field_tag  "template"%>  should be .html</td>
           </tr>
           <tr></tr>
           <tr></tr>
@@ -81,7 +81,7 @@
             <td> <%= text_area_tag "test_email_address", params[:test_email_address], :cols => "50", :rows => "5" %></td>
           </tr>
 
-          <tr id="ex_db" style="font-style:italic;color:#999999">
+          <tr id="ex_db" class="fld_help">
             <td><b>Note:</b> Please note that the newsletter will be sent to </td>
             <td>the SUBSCRIBED-USERS only from the existing database</td>
           </tr>
@@ -93,7 +93,7 @@
             <td> <%= file_field_tag  "csv_upload"%></td>
           </tr>
 
-          <tr id="csv_upload_notes" style="font-style:italic;color:#999999"> 
+          <tr id="csv_upload_notes" class="fld_help"> 
             <td><b>Note:</b> Please ensure that the uploaded file is CSV file only</td>
             <td>and EMAIL ID's are placed in 1st COL of csv only</td>
           </tr>
@@ -102,7 +102,7 @@
 
           <tr id="notify_mail">
             <td>Enter notification email *</td>
-            <td style="font-style:italic;color:#999999"><%= text_field_tag "notification_email", params[:notification_email] %> </td>
+            <td class="fld_help"><%= text_field_tag "notification_email", params[:notification_email] %> </td>
           </tr>
           <tr></tr>
           <tr></tr>
@@ -111,12 +111,12 @@
         </tbody>
       </table>
       <p>
-      <%= submit_tag 'Send Mailer',:style =>'background-color:#B5E1F4;margin-left:55px;'%>
+      <%= submit_tag 'Send Mailer',:class => "submit_btn",:style =>'margin-left:55px;'%>
       </p>
       <br/>
     </form>
 
-    <div style="text-align:center;margin-top:20px;">
+    <div class="back_btn" style="margin-top:20px;">
       <a href="/newsletters/manage"> back </a>
     </div>
     <br/>
@@ -161,7 +161,7 @@ $(document).ready(function () {
   <!-- Content ends -->  
 
   <!-- Footer starts -->  
-  <div class="footer" style="background-color:#5685D6; height:70px;width:880px;margin-left:40px;">
+  <div class="footer" style="width:880px;margin-left:40px;">
 
     <a href="http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413"><img style="margin-left:370px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
 
