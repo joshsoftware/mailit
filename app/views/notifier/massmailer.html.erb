@@ -1,1 +1,9 @@
+<!--%= Below javascript is required to show/hide necessary div's depending upon whether the newsletter is to be sent through mail or not --%>
+<script type="text/javascript">
+  $(document).ready(function () {
+      $('#click_here').show();
+      $('#unsubscribe').show();
+      });
+</script>
+
 <%= render :file => "#{Rails.root}/public#{@tmplte.gsub(/\?[0-9]*/,'')}" %>
