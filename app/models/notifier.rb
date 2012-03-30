@@ -29,6 +29,7 @@ class Notifier < ActionMailer::Base
        @subject = subject
        @code=uid
        @tmplte=mailer_template_to_render
+       @subscriber_first_name = Subscriber.find_by_email(email).try(:first_name)
   end 
 
 
