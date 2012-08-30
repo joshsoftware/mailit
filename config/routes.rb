@@ -6,6 +6,8 @@ Mailit::Application.routes.draw do
   
   match '/newsletters/manage' => 'newsletters#manage', :as => :newsletters
   
+  match '/add_subscriber/' => 'subscribers#add_subscriber', :as => :add_subscriber
+  
   match '/import_subscribers/' => 'subscribers#import_subscribers', :as => :import_subscribers
 
   match '/remove_bounced_subscribers/' => 'subscribers#remove_bounced_subscribers', :as => :remove_bounced_subscribers

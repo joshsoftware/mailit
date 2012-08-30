@@ -10,6 +10,13 @@ class SubscribersController < ApplicationController
     render
   end
 
+  def add_subscriber
+    if request.get?
+      render
+    else  
+    end
+  end
+
   def import_subscribers
     if request.get?
       render

@@ -1,0 +1,106 @@
+
+<!-- back starts -->   
+<div class="back" style="width:980px;margin-left:180px;">
+  <br/>
+  <br/>
+
+  <div style="width: 880px; float: left;padding:0 36pt;">
+    <%= render 'subscribers/header' %>
+  </div>
+
+  <!-- index starts -->
+  <div class="index" style="margin-left:48px;width:840px;">
+    <strong>Newsletters:</strong>
+    <br/>
+    <br/>
+  </div>
+  <!-- index ends --> 
+
+  <!-- Content Starts -->  
+  <div class="content" style="width: 700px;">  
+
+    <div class="newsletter">
+
+      <div class="total_subscriptions" style="text-align:center;">
+        <b>[ Total Users :: <%=Subscriber.all.count%> , Subscribed :: <%=Subscriber.active.count%> ]</b>
+      </div>  
+
+      <%= form_tag send_newsletters_path,:multipart => true %>
+
+      <div class="error">
+        <%= flash[:error] if flash[:error].present?%>
+        <%= flash[:error] =nil %>
+      </div>
+
+      <div class="notice">
+        <%= flash[:notice] if flash[:notice].present?%>
+        <%= flash[:notice] = nil%>
+      </div>
+
+      <table style="padding:10pt 200pt;">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr>
+            <td>First Name *</td>
+            <td class="fld_help"><%= text_field_tag "first_name", params[:first_name] %></td>
+          </tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr>
+            <td>Last Name *</td>
+            <td class="fld_help"><%= text_field_tag "last_name", params[:last_name] %></td>
+          </tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr></tr>
+          <tr>
+            <td>Email *</td>
+            <td class="fld_help"><%= text_field_tag "email", params[:email] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+      <%= submit_tag 'Add Subscriber',:class => "submit_btn",:style =>'margin-left:380px;'%>
+      </p>
+      <br/>
+    </form>
+
+    <div class="back_btn" style="margin-top:20px;">
+      <a href="/newsletters/manage"> back </a>
+    </div>
+    <br/>
+
+    </div>
+  </div>
+  <!-- Content ends -->  
+
+  <!-- Footer starts -->  
+  <div class="footer" style="width:880px;margin-left:48px;">
+
+    <a href="http://www.facebook.com/joshsoftware"><img style="margin-left:370px;" height="45" border="0" width="40" src="http://www.joshsoftware.com/images/newsletters/facebook.png"></a>
+
+    <a href="http://twitter.com/joshsoftware"><img style="margin-left:30px;" height="55" border="0" width="53" src="http://www.joshsoftware.com/images/newsletters/tweet.png"> </a>
+
+    <a href="http://www.meetup.com/PuneRailsMeetup/"><img style="margin-left:30px" src="http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png" border="0"></a>
+
+  </div>
+  <!-- Footer ends -->
+</div>
+<!-- Back ends -->
+
