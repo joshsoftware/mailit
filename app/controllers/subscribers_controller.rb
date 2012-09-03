@@ -13,8 +13,16 @@ class SubscribersController < ApplicationController
   def add_subscriber
     if request.get?
       render
-    else  
-    end
+    else
+      subscriber = Subscriber.new(:first_name => params[:first_name],:last_name => params[:last_name],:email => params[:email])
+      if subscriber.valid?
+        subscriber.save
+        flash[:notice] = I18n.t('notice.subscriber_added_success')
+      else
+        flash[:error] = I18n.t('error.all_mandatory_fields')
+      end
+      render
+    end   
   end
 
   def import_subscribers

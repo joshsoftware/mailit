@@ -7,7 +7,8 @@ en:
        csv_upload_only: "Please upload CSV file only"
        invalid_csv_upload: "Uploaded CSV file is not in the correct format"
        invalid_csv: "Invalid CSV file. Please correct it & try again."
-       all_mandatory_fields: "Please enter all mandatory fields(*)"
+       all_mandatory_fields: "Please enter all the mandatory fields(*)"
   notice:
        newsletter_sending_started: "Started sending newsletters. You will be notified upon completion."
        newsletter_sent_success: "Newsletter sent successfully"
+       subscriber_added_success: "Subscriber added successfully"

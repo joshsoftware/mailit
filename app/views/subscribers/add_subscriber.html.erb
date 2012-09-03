@@ -25,11 +25,11 @@
         <b>[ Total Users :: <%=Subscriber.all.count%> , Subscribed :: <%=Subscriber.active.count%> ]</b>
       </div>  
 
-      <%= form_tag send_newsletters_path,:multipart => true %>
+      <%= form_tag add_subscriber_path %>
 
       <div class="error">
         <%= flash[:error] if flash[:error].present?%>
-        <%= flash[:error] =nil %>
+        <%= flash[:error] = nil %>
       </div>
 
       <div class="notice">
@@ -37,7 +37,7 @@
         <%= flash[:notice] = nil%>
       </div>
 
-      <table style="padding:10pt 200pt;">
+      <table style="padding:10pt 220pt;">
         <thead>
           <tr>
             <th></th>
@@ -76,7 +76,7 @@
         </tbody>
       </table>
       <p>
-      <%= submit_tag 'Add Subscriber',:class => "submit_btn",:style =>'margin-left:380px;'%>
+      <%= submit_tag 'Add Subscriber',:class => "submit_btn",:style =>'margin-left:390px;'%>
       </p>
       <br/>
     </form>
