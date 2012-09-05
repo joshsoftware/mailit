@@ -19,7 +19,7 @@ class SubscribersController < ApplicationController
         subscriber.save
         flash[:notice] = I18n.t('notice.subscriber_added_success')
       else
-        flash[:error] = I18n.t('error.all_mandatory_fields')
+        flash[:error] = subscriber.errors.full_messages.join(' , ')
       end
       render
     end   

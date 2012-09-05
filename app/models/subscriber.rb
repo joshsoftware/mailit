@@ -4,6 +4,7 @@ require 'digest/md5'
 class Subscriber < ActiveRecord::Base
   validates_presence_of :first_name,:last_name,:email
   validates :email, :uniqueness => true
+  #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   scope :active, where(:is_subscribed => true)
 
