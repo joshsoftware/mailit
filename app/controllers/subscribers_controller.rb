@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController
 
-  before_filter :authentication_check, :only => [:import_subscribers,:remove_bounced_subscribers]
+  before_filter :authentication_check, :only => [:import_subscribers,:remove_bounced_subscribers,:add_subscriber]
 
   #Method to unsubscribe the user from newsletter on the basis of incoming uid
   def unsubscribe
