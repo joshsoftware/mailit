@@ -22,6 +22,12 @@ group :test do
   gem "rspec-rails", "~> 2.4"
   gem "factory_girl_rails"
 end
+
+#group added for Heroku deployment
+group :production do
+  gem "pg"
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
