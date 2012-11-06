@@ -52,11 +52,11 @@ namespace :mailer do
     Rails.logger.info ">>>>>>>>>>>Inside rake task>>>>>>>>>>>>"
     count = 0
     #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com"].each do |mail|
-    ["ninad@joshsoftware.com"].each do |mail|
+    ["ninad@joshsoftware.com","joshsoftwaretest1@gmail.com","joshsoftwaretest2@gmail.com","joshsoftwaretest3@gmail.com","joshsoftwaretest4@gmail.com"].each do |mail|
       user=Subscriber.find_by_email(mail)
-      #Notifier.deliver_test_mail(mail,user.unique_identifier)
+      Notifier.test_mail(mail,"12345ud").deliver
       #Below method will avoid the creation of template test_mail.html.erb under /app/views/notifier   
-      Notifier.deliver_massmailer(user)
+      #Notifier.deliver_massmailer(user)
       count +=1
     end
     puts "Mail sent to #{count} users"
