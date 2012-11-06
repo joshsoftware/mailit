@@ -44,8 +44,8 @@ class NewslettersController < ApplicationController
     tst_email_address.split(",").each do |email|
       unique_identifier = Digest::MD5.hexdigest(email)
       begin
-        #Notifier.massmailer(newsletter.mailer_subject,template_to_render,email,unique_identifier).deliver
-        system("rake mailer:verify_mail &")
+        Notifier.massmailer(newsletter.mailer_subject,template_to_render,email,unique_identifier).deliver
+        #system("rake mailer:verify_mail &")
         flash[:notice] = I18n.t('notice.newsletter_sent_success')
       rescue Exception => e
         puts "Error:=>#{e.message}"

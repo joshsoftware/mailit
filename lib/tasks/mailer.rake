@@ -41,20 +41,18 @@ namespace :mailer do
     Rails.logger.info "Mail sent to #{count} users"
     #send completion notification email to specified email id's
     if !@newsletter.notify_email.blank?
-        @newsletter.notify_email.split(",").each do |email|
-            Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
-        end  
+      @newsletter.notify_email.split(",").each do |email|
+        Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
+      end  
     end
   end
 
   #Task to be used for sending test mailers
   task :verify_mail => :environment do
-    Rails.logger.info ">>>>>>>>>>>Inside rake task>>>>>>>>>>>>"
     count = 0
-    #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com"].each do |mail|
-    ["ninad@joshsoftware.com","joshsoftwaretest1@gmail.com","joshsoftwaretest2@gmail.com","joshsoftwaretest3@gmail.com","joshsoftwaretest4@gmail.com"].each do |mail|
+    ["ninad@joshsoftware.com"].each do |mail|
       user=Subscriber.find_by_email(mail)
-      Notifier.test_mail(mail,"12345ud").deliver
+      Notifier.test_mail(mail,"uid12345").deliver
       #Below method will avoid the creation of template test_mail.html.erb under /app/views/notifier   
       #Notifier.deliver_massmailer(user)
       count +=1
