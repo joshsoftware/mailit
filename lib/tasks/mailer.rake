@@ -49,6 +49,7 @@ namespace :mailer do
 
   #Task to be used for sending test mailers
   task :verify_mail => :environment do
+    Rails.logger.info ">>>>>>>>>>>Inside rake task>>>>>>>>>>>>"
     count = 0
     #["ninad@joshsoftware.com","gautam@joshsoftware.com","sethu@joshsoftware.com"].each do |mail|
     ["ninad@joshsoftware.com"].each do |mail|
