@@ -5,4 +5,3 @@ tmp/
 public/system/templates/*
 db/schema.rb
 config/database.yml
-config/initializers/notifier.rb
