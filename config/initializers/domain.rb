@@ -1,1 +1,1 @@
-DOMAIN_URL = "http://mailit.herokuapp.com/"
+DOMAIN_URL = "http://mailit.joshsoftware.com/"
