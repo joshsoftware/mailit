@@ -42,6 +42,8 @@ namespace :mailer do
     #send completion notification email to specified email id's
     if !@newsletter.notify_email.blank?
       @newsletter.notify_email.split(",").each do |email|
+        puts "Notification Email ==>#{email}"
+        Rails.logger.info "Notification Email ==>#{email}"
         Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
       end  
     end
