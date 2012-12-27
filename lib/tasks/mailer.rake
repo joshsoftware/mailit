@@ -26,6 +26,7 @@ namespace :mailer do
     @newsletter=Newsletter.find(newsletter_id)
     count = 0
 
+=begin
     Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
       begin
         Notifier.massmailer(@newsletter.mailer_subject,newsletter_template,subscriber.email,subscriber.unique_identifier).deliver
@@ -37,6 +38,7 @@ namespace :mailer do
         Rails.logger.info "#{subscriber.login} - Error in sending to #{subscriber.email}"
       end
     end
+=end    
     Rails.logger.info "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
     Rails.logger.info "Mail sent to #{count} users"
     #send completion notification email to specified email id's
