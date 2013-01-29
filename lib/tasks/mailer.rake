@@ -26,9 +26,9 @@ namespace :mailer do
     @newsletter=Newsletter.find(newsletter_id)
     count = 0
 
-    #Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
+    Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
     #This is temporary query to send newsletter to remaining ones
-    Subscriber.where("is_subscribed = true and id > ?", 24460).each do |subscriber|  
+    #Subscriber.where("is_subscribed = true and id > ?", 24460).each do |subscriber|  
       begin
         Notifier.massmailer(@newsletter.mailer_subject,newsletter_template,subscriber.email,subscriber.unique_identifier).deliver
         puts "Sending mail to #{subscriber.email} completed"
