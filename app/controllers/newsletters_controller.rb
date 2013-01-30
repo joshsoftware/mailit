@@ -55,7 +55,7 @@ class NewslettersController < ApplicationController
 
   def external_database_mailer(newsletter,uploaded_csv,template_to_render)
     begin
-      external_users=CSV::Reader.parse(uploaded_csv)
+      external_users=CSV.parse(uploaded_csv.read)
       external_users.each do |row|
         unique_identifier = Digest::MD5.hexdigest(row[0])
         Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver

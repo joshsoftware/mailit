@@ -17,7 +17,7 @@ class Subscriber < ActiveRecord::Base
   #Method to import users from uploaded csv into db
   def self.import(subscriber_csv)
     @@import_cnt=0
-    @subscriber_list=CSV::Reader.parse(subscriber_csv)
+    @subscriber_list=CSV.parse(subscriber_csv.read)
     @subscriber_list.each do |row|
       begin
         next if row.blank?
@@ -56,7 +56,7 @@ class Subscriber < ActiveRecord::Base
   #Method to remove bounced email/users from db
   def self.remove_bounced_users(bounces_csv)
     @@rem_count=0
-    @subscriber_removal_list=CSV::Reader.parse(bounces_csv)
+    @subscriber_removal_list=CSV.parse(bounces_csv.read)
     @subscriber_removal_list.each do |row|
       begin
         user = Subscriber.find_by_email(row[0])
