@@ -54,16 +54,24 @@ class NewslettersController < ApplicationController
   end
 
   def external_database_mailer(newsletter,uploaded_csv,template_to_render)
+    ext_db_count = 0 
     begin
       external_users=CSV.parse(uploaded_csv.read)
       external_users.each do |row|
         unique_identifier = Digest::MD5.hexdigest(row[0])
         Notifier.massmailer(params[:subject],template_to_render, row[0],unique_identifier).deliver
         flash[:notice] = I18n.t('notice.newsletter_sent_success')
+        ext_db_count += 1
       end
     rescue Exception => e
       puts "Error:=>#{e.message}"
       flash[:error] = I18n.t('error.invalid_csv')
+    end
+    Rails.logger.info "Mail sent to =============>#{ext_db_count} users"
+    if !newsletter.notify_email.blank?
+      newsletter.notify_email.split(",").each do |email|
+        Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",template_to_render,email,"").deliver
+      end
     end
   end
 
