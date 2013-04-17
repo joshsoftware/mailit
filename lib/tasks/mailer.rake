@@ -23,14 +23,14 @@ namespace :mailer do
   task :send_newsletters => :environment do
     newsletter_id = ENV['news_id']
     newsletter_template = ENV['template_to_render']
-    @newsletter=Newsletter.find(newsletter_id)
+    newsletter=Newsletter.find(newsletter_id)
     count = 0
 
     Subscriber.find(:all, :conditions => ["is_subscribed = true"]).each do |subscriber|
     #This is temporary query to send newsletter to remaining ones
     #Subscriber.where("is_subscribed = true and id > ?", 24460).each do |subscriber|  
       begin
-        Notifier.massmailer(@newsletter.mailer_subject,newsletter_template,subscriber.email,subscriber.unique_identifier).deliver
+        Notifier.massmailer(newsletter,newsletter.mailer_subject,newsletter_template,subscriber.email,subscriber.unique_identifier).deliver
         puts "Sending mail to #{subscriber.email} completed"
         Rails.logger.info "Sending mail to #{subscriber.email} completed"
         count += 1
@@ -43,11 +43,11 @@ namespace :mailer do
     Rails.logger.info "Count of subscribed users:#{Subscriber.find(:all, :conditions => ["is_subscribed = true"]).size}"
     Rails.logger.info "Mail sent to #{count} users"
     #send completion notification email to specified email id's
-    if !@newsletter.notify_email.blank?
-      @newsletter.notify_email.split(",").each do |email|
+    if !newsletter.notify_email.blank?
+      newsletter.notify_email.split(",").each do |email|
         puts "Notification Email ==>#{email}"
         Rails.logger.info "Notification Email ==>#{email}"
-        Notifier.massmailer("This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
+        Notifier.massmailer(newsletter,"This is to notify you that below newsletter has been sent to the database",newsletter_template,email,"").deliver
       end  
     end
   end
