@@ -1,0 +1,149 @@
+/ back starts
+.back{:style => "width:980px;margin-left:180px;"}
+  %br/
+  %br/
+  %div{:style => "width: 880px; float: left;padding:0 36pt;"}
+    = render 'subscribers/header'
+  / index starts
+  .index{:style => "margin-left:48px;width:840px;"}
+    %strong Newsletters:
+    %br/
+    %br/
+  / index ends
+  / Content Starts
+  .content{:style => "width: 700px;"}
+    .newsletter
+      = form_tag send_newsletters_path,:multipart => true
+      .error
+        = flash[:error] if flash[:error].present?
+        = flash[:error] =nil
+      .notice
+        = flash[:notice] if flash[:notice].present?
+        = flash[:notice] = nil
+      %table{:style => "padding:0 40pt;"}
+        %thead
+          %tr
+            %th
+            %th
+        %tbody
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+            %td Mailer Subject *
+            %td.fld_help
+              = text_field_tag "subject", params[:subject]
+              e.g Josh Software | Newsletter | June 2011
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+          - @sections.each_with_index do |section, index|
+            %tr
+              %td= "Section #{index}"
+              %td.fld_help
+                = text_field_tag "section[#{index}][title]", section[:title]
+            %tr
+              %td= "Section #{index} content"
+              %td.fld_help
+                = text_area_tag "section[#{index}][content]", section[:content], rows: 10, cols: 40
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+            %td Type of Mailer *
+            %td
+              = select_tag  "send_mail",options_for_select([["Test Mailer","test"],["Existing Database","database",],["External Database","externaldb"]], :selected => params[:send_mail])
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr
+          %tr#test_mail
+            %td Enter email address (comma separated) *
+            %td
+              = text_area_tag "test_email_address", params[:test_email_address], :cols => "50", :rows => "5"
+          %tr#ex_db.fld_help
+            %td
+              %b Note:
+              Please note that the newsletter will be sent to
+            %td the SUBSCRIBED-USERS only from the existing database
+          %tr
+          %tr#csv_upload
+            %td Upload CSV *
+            %td
+              = file_field_tag  "csv_upload"
+          %tr#csv_upload_notes.fld_help
+            %td
+              %b Note:
+              Please ensure that the uploaded file is CSV file only
+            %td and EMAIL ID's are placed in 1st COL of csv only
+          %tr
+          %tr
+          %tr#notify_mail
+            %td Enter notification email *
+            %td.fld_help
+              = text_field_tag "notification_email", params[:notification_email]
+          %tr
+          %tr
+          %tr
+      %p
+        = submit_tag 'Send Mailer',:class => "submit_btn",:style =>'margin-left:55px;'
+      %br/
+      .back_btn{:style => "margin-top:20px;"}
+        %a{:href => "/newsletters/manage"} back
+      %br/
+      :javascript
+      // 
+    function set(){
+      if($('#send_mail').val() == "test"){
+        $('#test_mail').show();
+        $('#ex_db').hide();
+        $('#csv_upload').hide();
+        $('#csv_upload_notes').hide();
+        $('#notify_mail').hide();
+      }
+      else if($('#send_mail').val() == "externaldb"){
+        $('#test_mail').hide();
+        $('#ex_db').hide();
+        $('#csv_upload').show();
+        $('#csv_upload_notes').show();
+        $('#notify_mail').show();
+      }
+      else{
+        $('#test_mail').hide();
+        $('#csv_upload').hide();
+        $('#csv_upload_notes').hide();
+        $('#ex_db').show();    
+        $('#notify_mail').show();
+      }
+    }
+
+set();
+$(document).ready(function () {
+    $('#send_mail').change(function(){
+      set();
+      });
+    });
+// 
+  / Content ends
+  / Footer starts
+  .footer{:style => "width:880px;margin-left:48px;"}
+    %a{:href => "http://www.meetup.com/PuneRailsMeetup/", :target => "_blank"}
+      %img{:border => "0", :src => "http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png", :style => "margin-left:12px;margin-top:13px;"}/
+    %a{:href => "http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413", :target => "_blank"}
+      %img{:src => "http://joshsoftware.com/assets/glyphicons_390_facebook.png", :style => "margin-left:655px;margin-bottom:10px;"}/
+    %a{:href => "http://twitter.com/joshsoftware", :target => "_blank"}
+      %img{:src => "http://joshsoftware.com/assets/glyphicons_392_twitter.png", :style => "margin-left:10px;margin-bottom:10px;"}/
+    %a{:href => "http://blog.joshsoftware.com/", :target => "_blank"}
+      %img{:src => "http://joshsoftware.com/assets/glyphicons_397_rss.png", :style => "margin-left:10px;margin-bottom:10px;"}/
+    %a{:href => "http://www.linkedin.com/company/josh-software-private-limited", :target => "_blank"}
+      %img{:src => "http://joshsoftware.com/assets/glyphicons_377_linked_in.png", :style => "margin-left:10px;margin-bottom:10px;"}/
+  / Footer ends
+/ Back ends

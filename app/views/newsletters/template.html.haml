@@ -1,0 +1,112 @@
+!!! Strict
+%html{"xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title JOSH SOFTWARE PVT. LTD.
+    %meta{:content => "text/html; charset=ISO-8859-1", "http-equiv" => "Content-Type"}
+    %meta{:content => "document", :name => "resource-type"}
+    %meta{:content => "all", :name => "audience"}
+    %meta{:content => "global", :name => "distribution"}
+    %meta{:content => "", :name => "keywords"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "FOLLOW, INDEX", :name => "robots"}
+    %meta{:content => "2 days", :name => "revisit-after"}
+    %meta{:content => "Site Name", :name => "copyright"}
+    %meta{:content => "Site admin Email", :name => "author"}
+    %meta{:content => "Site description text", :name => "abstract"}
+    %meta{:content => @newsletter_title, :name => "og:title"}
+    %meta{:content => @current_newsletter_url, :name => "og:url"}
+    %meta{:content => "http://mailit.joshsoftware.com/images/josh_rol3.png", :name => "og:image"}
+    %script{:src => "/assets/jquery.js", :type => "text/javascript"}
+    :javascript
+      $(document).ready(function () {
+          $('#email_back').css('margin-left', '270px');
+          });
+  %body
+    / back starts
+    #email_back.back{:style => "font-family: Arial,sans-serif; color:black; font-size: 14px;text-align:justify;background-color:#B1B6B9;width:780px;height:auto;margin-left:10px;padding-bottom:45px;"}
+      %br
+      #click_here{:align => "center", :style => "color:black; font-size: 11px;display:none"}
+        If you have trouble viewing this email,
+        %a{:href => @current_newsletter_url, :target => "_blank"} click here
+      %br
+      %div{:style => "text-align: left; padding: 0pt; margin: 0pt auto; width: 680px; background-color:#CEDEE7;"}
+        .dt{:style => "background-color:#437EB9; height:40px;color:white;font-size:20px;text-align:center;padding:10px 0px 0px 0px;"}
+          %strong= @newsletter_title
+        %div{:style => "width: 680px; float: left;"}
+          / header Starts
+          .header{:style => "background-color:white;height:120px;font-size: 11px;"}
+            / logo Starts
+            .logo{:style => "width: 500px; float: left; padding: 20px;"}
+              %a{:href => "http://www.joshsoftware.com/", :target => "_blank"}
+                %img{:border => "0", :src => "http://www.joshsoftware.com/assets/Josh-Software-Logo.svg"}
+              %strong
+                %i
+                  %font{:size => "2"} Where Programming is an Art!
+            / logo ends
+            / ruby Starts
+            .ruby{:style => "width: 100px; padding: 20px; float: right; text-align:right;"}
+              %img{:border => "0", :src => "http://mailit.joshsoftware.com/images/rails.png"}
+            / ruby ends
+          / header ends
+        / Content Starts
+        .content{:style => "width: 600px; padding-left:40px; text-align:justify;"}
+          %div{:style => "margin-top:135px;"}
+            %hr{:noshade => "", :style => "color: #AFAFAF;height: 3px;background-color: #AFAFAF;"}
+          / Latestmasterpieces Starts
+          .latestmasterpieces
+            - @sections.each do |section|
+              %p
+                %strong= section[:title]
+              %p= raw section[:content]
+              %hr{:noshade => "", :style => "color: #AFAFAF;height: 3px;background-color: #AFAFAF;"}
+
+            %p
+              %strong Our Publication
+            %table
+              %tr
+                %td
+                  %p
+                    %a{:href => "http://www.packtpub.com/ruby-and-mongodb-web-development-beginners-guide/book", :target => "_blank"}
+                      %img{:border => "0", :src => "http://www.packtpub.com/sites/default/files/5023OS_Ruby%20and%20MongoDB%20Web%20Development_cov.jpg", :style => "width:160px; height:210px;"}
+                %td{:style => "vertical-align:top;padding-top:5px;padding-left:20px;"}
+                  %ul{:style => "padding-left:10px;"}
+                    %li Step-by-step instructions and practical examples for creating web applications with Ruby and MongoDB
+                  %br
+                  %li Learn to design the object model in a NoSQL way
+                  %br
+                  %li Create objects in Ruby and map them to MongoDB
+                  %br
+                  %p
+                    You can view our sample chapters and prefaces of this title on
+                    %a{:href => "http://packtlib.packtpub.com/library/9781849515023", :style => "color:black;", :target => "_blank"} PacktLib
+                    or
+                    = succeed "." do
+                      %a{:href => "http://www.packtpub.com/sites/default/files/9781849515023-Chapter-02.pdf?utm_source=packtpub&amp;utm_medium=free&amp;utm_campaign=pdf", :style => "color:black;", :target => "_blank"} download sample chapters in PDF format
+                  %p
+                    You can download the code and support files for this book
+                    = succeed "." do
+                      %a{:href => "http://www.packtpub.com/support?nid=9531", :style => "color:black;", :target => "_blank"} here
+            %hr{:noshade => "", :style => "color: #AFAFAF;height: 3px;background-color: #AFAFAF;"}
+            #unsubscribe{:style => "color:black;font-size: 11px;text-align:center;display:none"}
+              %br
+              If you do not wish to receive these newsletters, please reply with "unsubscribe" in the subject.
+          / Latestmasterpieces end
+        / Content ends
+        %br
+        %br
+        / Footer starts
+        .footer{:style => "background-color:#437EB9;"}
+          %a{:href => "http://www.meetup.com/PuneRailsMeetup/", :target => "_blank"}
+            %img{:border => "0", :src => "http://img1.meetupstatic.com/94068167911579584/img/logo_63x42.png", :style => "margin-left:12px;margin-top:5px;"}
+          %a{:href => "http://www.facebook.com/pages/Josh-Software-Private-Limited/239743580413", :target => "_blank"}
+            %img{:src => "http://joshsoftware.com/assets/glyphicons_390_facebook.png", :style => "margin-left:450px;margin-bottom:10px;"}
+          %a{:href => "http://twitter.com/joshsoftware", :target => "_blank"}
+            %img{:src => "http://joshsoftware.com/assets/glyphicons_392_twitter.png", :style => "margin-left:10px;margin-bottom:10px;"}
+          %a{:href => "http://blog.joshsoftware.com/", :target => "_blank"}
+            %img{:src => "http://joshsoftware.com/assets/glyphicons_397_rss.png", :style => "margin-left:10px;margin-bottom:10px;"}
+          %a{:href => "http://www.linkedin.com/company/josh-software-private-limited", :target => "_blank"}
+            %img{:src => "http://joshsoftware.com/assets/glyphicons_377_linked_in.png", :style => "margin-left:10px;margin-bottom:10px;"}
+        / Footer end
+        %div{:style => "float:left;"}
+          / Container Ends
+        / back ends

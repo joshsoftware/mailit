@@ -13,6 +13,7 @@ gem 'will_paginate', '~> 3.0'
 
 group :assets do
   gem "sass-rails"
+  gem "haml-rails"
   gem 'jquery-rails'
   gem 'uglifier'
   gem 'coffee-rails'

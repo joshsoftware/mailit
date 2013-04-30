@@ -2,7 +2,7 @@ require 'csv'
 
 class NewslettersController < ApplicationController
 
-  before_filter :authentication_check, :only => [:manage,:send_newsletters]
+  #before_filter :authentication_check, :only => [:manage,:send_newsletters]
 
   def index
     @news_index_list=Newsletter.where(:type_of_mailer =>"database").paginate(:page => params[ :page ],:per_page => 10).order('created_at DESC')
@@ -10,13 +10,23 @@ class NewslettersController < ApplicationController
 
   def send_newsletters
     if request.get?
+      @sections = [ { title: 'Ruby Events', content: ''},
+                    { title: 'Showcase', content: ''},
+                    { title: 'Enjoy Rails', content: ''} ]
       render
     else
-      news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail], 
+      news=Newsletter.new(:mailer_subject => params[:subject], :type_of_mailer => params[:send_mail], 
                           :notify_email => params[:notification_email])
+
+      @sections = params[:section].values
       if news.valid?
-        news.save
+        template = File.open("#{Rails.root}/public/#{Date.today.strftime("%B%Y")}_Newsletter.html", 'w') do |f|
+          f.write render_to_string 'template'
+        end
         #get the url of the template to be rendered
+        news.template = template
+        news.save!
+
         template_to_render=news.template.url
         #Test_mailer
         if params[:send_mail] == "test" and !params[:test_email_address].blank?
