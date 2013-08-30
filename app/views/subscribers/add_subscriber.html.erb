@@ -52,7 +52,7 @@
           <tr></tr>
           <tr>
             <td>First Name *</td>
-            <td class="fld_help"><%= text_field_tag "first_name", params[:first_name] %></td>
+            <td class="fld_help"><%= text_field_tag "first_name", @subscriber.try(:first_name) %></td>
           </tr>
           <tr></tr>
           <tr></tr>
@@ -62,7 +62,7 @@
           <tr></tr>
           <tr>
             <td>Last Name *</td>
-            <td class="fld_help"><%= text_field_tag "last_name", params[:last_name] %></td>
+            <td class="fld_help"><%= text_field_tag "last_name", @subscriber.try(:last_name) %></td>
           </tr>
           <tr></tr>
           <tr></tr>
@@ -72,7 +72,7 @@
           <tr></tr>
           <tr>
             <td>Email *</td>
-            <td class="fld_help"><%= text_field_tag "email", params[:email] %></td>
+            <td class="fld_help"><%= text_field_tag "email", @subscriber.try(:email) %></td>
           </tr>
         </tbody>
       </table>

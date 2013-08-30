@@ -14,12 +14,13 @@ class SubscribersController < ApplicationController
     if request.get?
       render
     else
-      subscriber = Subscriber.new(:first_name => params[:first_name],:last_name => params[:last_name],:email => params[:email])
-      if subscriber.valid?
-        subscriber.save
+      @subscriber = Subscriber.new(:first_name => params[:first_name],:last_name => params[:last_name],:email => params[:email])
+      if @subscriber.valid?
+        @subscriber.save
         flash[:notice] = I18n.t('notice.subscriber_added_success')
+        @subscriber = Subscriber.new
       else
-        flash[:error] = subscriber.errors.full_messages.join(' , ')
+        flash[:error] = @subscriber.errors.full_messages.join(' , ')
       end
       render
     end   
