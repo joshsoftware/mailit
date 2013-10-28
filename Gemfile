@@ -11,6 +11,8 @@ gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 gem 'will_paginate', '~> 3.0'
 
+gem 'rest-client' , "~> 1.6.7"
+
 group :assets do
   gem "sass-rails"
   gem 'jquery-rails'
