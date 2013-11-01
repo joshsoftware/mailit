@@ -23,7 +23,7 @@
 
       <p>
       <% @news_index_list.each do |newsletter| %>
-        <b><a href= "<%=DOMAIN_URL%><%= newsletter.created_at.strftime("%B_%G").gsub("_","") %>_Newsletter" target="_blank" style="color:black;"><%= newsletter.created_at.strftime("%B_%G") %></a></b>
+        <b><a href= "<%= newsletter.created_at.strftime("%B_%G").gsub("_","") %>_Newsletter" target="_blank" style="color:black;"><%= newsletter.created_at.strftime("%B_%G") %></a></b>
         <hr noshade class="partition"></hr>
       <% end %>
       </p>
