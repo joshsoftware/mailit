@@ -9,34 +9,26 @@ class NewslettersController < ApplicationController
   end
 
   def send_newsletters
-    if request.get?
-      render
-    else
-      news=Newsletter.new(:mailer_subject => params[:subject],:template => params[:template], :type_of_mailer => params[:send_mail], 
-                          :notify_email => params[:notification_email])
-      if news.valid?
-        news.save
-        #get the url of the template to be rendered
-        template_to_render=news.template.url
-        #Test_mailer
-        if params[:send_mail] == "test" and !params[:test_email_address].blank?
-          send_testmailers(news,params[:test_email_address],template_to_render)
-          #Mailer to subscribed users in the database
-        elsif params[:send_mail] == "database"
-          system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
-          flash[:notice] = I18n.t('notice.newsletter_sending_started')
-          #Mailer to external db 
-        elsif params[:send_mail] == "externaldb" and !params[:csv_upload].blank?
-          external_database_mailer(news,params[:csv_upload],template_to_render)
-        else
-          flash[:error] = I18n.t('error.all_mandatory_fields')
-        end
-        #when newsletter is invalid has some errors in it    
-      else
-        flash[:error] = news.errors.full_messages.join(', ')
-      end
-      render :action => :send_newsletters
-    end
+    render and return if request.get?
+   
+    parameter  = params
+    news=Newsletter.new(:mailer_subject => parameter[:subject],:template => parameter[:template], :type_of_mailer => parameter[:send_mail], 
+                        :notify_email => parameter[:notification_email])
+    
+    flash[:error] = news.errors.full_messages.join(', ') and return unless news.valid?
+    
+    news.save
+    #get the url of the template to be rendered
+    template_to_render=news.template.url 
+    #Test_mailer
+    send_testmailers(news,parameter[:test_email_address],template_to_render) and return if parameter[:send_mail] == "test" and !parameter[:test_email_address].blank?     
+    #Mailer to external db 
+    external_database_mailer(news,parameter[:csv_upload],template_to_render) and return if parameter[:send_mail] == "externaldb" and !parameter[:csv_upload].blank?
+    #when newsletter is invalid has some errors in it    
+    flash[:error] = I18n.t('error.all_mandatory_fields') and return if parameter[:send_mail] != "database"
+    #Mailer to subscribed users in the database
+    system("rake mailer:send_newsletters news_id=#{news.id} template_to_render=#{template_to_render} &")
+    flash[:notice] = I18n.t('notice.newsletter_sending_started')
   end
 
   def send_testmailers(newsletter,tst_email_address,template_to_render)
@@ -54,20 +46,14 @@ class NewslettersController < ApplicationController
   end
 
   def external_database_mailer(newsletter,uploaded_csv,template_to_render)
-    ext_db_count = 0 
     begin
-      external_users=CSV.parse(uploaded_csv.read)
-      external_users.each do |row|
-        unique_identifier = Digest::MD5.hexdigest(row[0])
-        Notifier.massmailer(newsletter,params[:subject],template_to_render, row[0],unique_identifier).deliver
-        flash[:notice] = I18n.t('notice.newsletter_sent_success')
-        ext_db_count += 1
+      CSV.parse(uploaded_csv.read).each do |row|
+        Notifier.massmailer(newsletter,params[:subject],template_to_render, row[0],  Digest::MD5.hexdigest(row[0])).deliver
       end
+      flash[:notice] = I18n.t('notice.newsletter_sent_success')
     rescue Exception => e
-      puts "Error:=>#{e.message}"
       flash[:error] = I18n.t('error.invalid_csv')
     end
-    Rails.logger.info "Mail sent to =============>#{ext_db_count} users"
     if !newsletter.notify_email.blank?
       newsletter.notify_email.split(",").each do |email|
         Notifier.massmailer(newsletter,"This is to notify you that below newsletter has been sent to the database",template_to_render,email,"").deliver
