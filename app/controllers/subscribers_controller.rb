@@ -60,4 +60,16 @@ class SubscribersController < ApplicationController
     end  
   end
 
+  #below method is use to take backup of current database on heroku
+  def back_up_current_db
+    system("rake take_db_backup_on_heroku &")
+    flash[:notice] = I18n.t('notice.database_backup_taken')
+    redirect_to request.referrer and return
+  end
+
+  #below method would remove blocke,bounced,spam & invalid users from sendgrid account as well as from database 
+  def clean_up_invalid_users
+
+  end
+
 end
