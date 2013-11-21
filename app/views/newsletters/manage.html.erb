@@ -19,6 +19,17 @@
     </div>
     <!-- index ends -->          
 
+    <div class="error">
+      <%= flash[:error] if flash[:error].present?%>
+      <%= flash[:error] =nil %>
+    </div>
+
+    <div class="notice">
+      <%= flash[:notice] if flash[:notice].present?%>
+      <%= flash[:notice] = nil%>
+    </div>
+
+
     <!-- Content Starts -->  
     <div class="content">  
       <br/><br/>
@@ -26,7 +37,11 @@
       <hr noshade class="partition"></hr>
       <b><a href="/import_subscribers" style="color:black;">Import Subscribers</a></b>
       <hr noshade class="partition"></hr>
-      <b><a href="/remove_bounced_subscribers" style="color:black;">Remove Bounced Subscribers</a></b>
+      <b><a href="/" style="color:black;">Clean Invalid Subscribers from SendGrid Account and Database</a></b>
+      <hr noshade class="partition"></hr>
+      <b><a href="/remove_bounced_subscribers" style="color:black;">Upload Subscribers To Remove</a></b>
+      <hr noshade class="partition"></hr>
+      <b><a href="/back_up_current_db" style="color:black;">Backup Current Database On Heroku</a></b>
       <hr noshade class="partition"></hr>
       <b><a href="/send_newsletters" style="color:black;">Send Newsletters</a></b>
       <hr noshade class="partition"></hr>
