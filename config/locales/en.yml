@@ -12,3 +12,4 @@ en:
        newsletter_sending_started: "Started sending newsletters. You will be notified upon completion."
        newsletter_sent_success: "Newsletter sent successfully"
        subscriber_added_success: "Subscriber added successfully"
+       database_backup_taken: "Database backup would be taken on heroku in a moment. In some time , you can execute the command 'heroku pgbackups' on root of your console to check for backup taken"
