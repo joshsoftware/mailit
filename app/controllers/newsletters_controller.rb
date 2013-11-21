@@ -23,7 +23,7 @@ class NewslettersController < ApplicationController
     #Test_mailer
     send_testmailers(news,parameter[:test_email_address],template_to_render) and return if parameter[:send_mail] == "test" and !parameter[:test_email_address].blank?     
     #Mailer to external db 
-    external_database_mailer(news,parameter[:csv_upload],template_to_render) and return if parameter[:send_mail] == "externaldb" and !parameter[:csv_upload].blank?
+    external_database_mailer(news,parameter[:csv_upload],template_to_render) and return if !parameter[:csv_upload].blank? and parameter[:send_mail] == "externaldb" 
     #when newsletter is invalid has some errors in it    
     flash[:error] = I18n.t('error.all_mandatory_fields') and return if parameter[:send_mail] != "database"
     #Mailer to subscribed users in the database
