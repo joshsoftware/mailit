@@ -13,6 +13,8 @@ gem 'will_paginate', '~> 3.0'
 
 gem 'rest-client' , "~> 1.6.7"
 
+gem 'heroku' , "~> 2.33.0"
+
 group :assets do
   gem "sass-rails"
   gem 'jquery-rails'
