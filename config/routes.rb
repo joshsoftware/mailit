@@ -15,6 +15,8 @@ Mailit::Application.routes.draw do
   match '/send_newsletters/' => 'newsletters#send_newsletters', :as => :send_newsletters
 
   match '/back_up_current_db/' => 'subscribers#back_up_current_db' , :as => :back_up_current_db
+
+  match '/clean_up_invalid_users/' => 'subscribers#clean_up_invalid_users' , :as => :clean_up_invalid_users
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -58,9 +58,11 @@ class SubscribersController < ApplicationController
     redirect_to request.referrer and return
   end
 
-  #below method would remove blocke,bounced,spam & invalid users from sendgrid account as well as from database 
+  #below method would remove blocked,bounced,spam & invalid users from sendgrid account as well as from database 
   def clean_up_invalid_users
-
+    system("rake clean_up_invalid_users_from_sendgrid_account &")
+    flash[:notice] = I18n.t('notice.sendgrid_and_db_cleanup_started')
+    redirect_to request.referrer and return
   end
 
 end
