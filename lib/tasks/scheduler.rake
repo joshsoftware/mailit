@@ -1,5 +1,6 @@
 require 'rest_client'
 require 'json'
+require 'heroku-api'
 
 desc "Remove the blocked,bounced,spam & invalid users from sendgrid account using sendgrid API"
 task :clean_up_invalid_users_from_sendgrid_account => :environment do
@@ -51,12 +52,9 @@ def delete_invalid_users
     #delete from sendgrid
     #RestClient.post(delete_invalid_url, :api_user=> ENV['PROD_USERNAME'] , :api_key=> ENV['PROD_PASSWORD'])
 
-
     #Need to delete the users belonging to all above category from our own database as well collected under the array total_users_to_be_deleted
-    if total_users_to_be_deleted.empty?
-    
+    unless total_users_to_be_deleted.empty?
       puts "total delete count::#{total_users_to_be_deleted.size}"
-
       total_users_to_be_deleted.flatten.compact.uniq.each do |user_email|
         puts user_email
         s = Subscriber.where(:email=> user_email).first
@@ -72,5 +70,7 @@ end
 
 #task to take database backup on heroku using 'pgbackup' addon & delete the oldest amongst 7 backups taken
 task :take_db_backup_on_heroku => :environment do
-  system("heroku pgbackups:capture --expire")
+  #system("heroku pgbackups:capture --expire")
+  heroku = Heroku::API.new(:username => ENV["HEROKU_UNAME"], :password => ENV["HEROKU_PSWD"])
+  Heroku::API.new.post_ps('mailit', 'heroku pgbackups:capture --expire')
 end
