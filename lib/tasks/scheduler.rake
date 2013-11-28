@@ -15,7 +15,6 @@ def delete_invalid_users
     b=JSON.parse(block_response)
     b.collect{|i| total_users_to_be_deleted << i['email']}
 
-    puts ">>>>>>>>>>>>>>>>"
     puts "block count:#{total_users_to_be_deleted.size}"
 
     delete_blocks_url = 'https://sendgrid.com/api/blocks.delete.json'
@@ -56,13 +55,11 @@ def delete_invalid_users
     unless total_users_to_be_deleted.empty?
       puts "total delete count::#{total_users_to_be_deleted.size}"
       total_users_to_be_deleted.flatten.compact.uniq.each do |user_email|
-        puts user_email
         s = Subscriber.where(:email=> user_email).first
-        #s.delete if s.blank?
+        s.delete unless s.blank?
       end
     end
   rescue Exception => e
-    puts "Error>>>>>>>"
     puts e
   end
 
@@ -72,5 +69,5 @@ end
 task :take_db_backup_on_heroku => :environment do
   #system("heroku pgbackups:capture --expire")
   heroku = Heroku::API.new(:username => ENV["HEROKU_UNAME"], :password => ENV["HEROKU_PSWD"])
-  Heroku::API.new.post_ps('mailit', 'heroku pgbackups:capture --expire')
+  heroku.post_ps('mailit', 'heroku pgbackups:capture --expire')
 end
