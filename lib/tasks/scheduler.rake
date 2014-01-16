@@ -67,7 +67,5 @@ end
 
 #task to take database backup on heroku using 'pgbackup' addon & delete the oldest amongst 7 backups taken
 task :take_db_backup_on_heroku => :environment do
-  system("heroku pgbackups:capture --expire")
-  #heroku = Heroku::API.new(:username => ENV["HEROKU_UNAME"], :password => ENV["HEROKU_PSWD"])
-  #heroku.post_ps('mailit', 'heroku pgbackups:capture --expire')
+  system("heroku pgbackups:capture --expire --app mailit")
 end
