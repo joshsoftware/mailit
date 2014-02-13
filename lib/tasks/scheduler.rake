@@ -80,7 +80,7 @@ def delete_invalid_users
     unless total_invalid_users_to_be_deleted.empty?
       total_invalid_users_to_be_deleted.flatten.compact.uniq.each do |user_email|
         #delete from sendgrid
-        RestClient.post(delete_invalid_url, :api_user=> ENV['PROD_USERNAME'] , :api_key=> ENV['PROD_PASSWORD'])
+        RestClient.post(delete_invalid_url, :api_user=> ENV['PROD_USERNAME'] , :api_key=> ENV['PROD_PASSWORD'], :email=> user_email)
         #delete from db
         s = Subscriber.where(:email=> user_email).first
         s.delete unless s.blank?
